@@ -9,23 +9,52 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        />
+        android:src="@drawable/ic_launcher"
+        android:contentDescription="TODO" />
 
     <TextView
-        android:id="@+id/itemWifiTextView"
+        android:id="@+id/itemWifiSSID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/itemWifiImageView"
+        android:layout_alignBaseline="@+id/itemWifiImageView"
         android:layout_marginBottom="14dp"
-        android:layout_toRightOf="@+id/itemWifiImageView"
+        android:layout_toEndOf="@+id/itemWifiImageView"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/itemWifiBSSID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/itemWifiImageView"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/itemWifiSSID"
+        android:text="TextView" />
+<!--
+    <TextView
+        android:id="@+id/itemWifiCap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/itemWifiImageView"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/itemWifiBSSID"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/itemWifiStandard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/itemWifiImageView"
+        android:layout_marginBottom="14dp"
+        android:layout_toEndOf="@+id/itemWifiCap"
+        android:text="TextView" />
+    -->
 
     <TextView
         android:id="@+id/itemWifiSignalStrength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/itemWifiTextView"
-        android:layout_alignBottom="@+id/itemWifiTextView"
+        android:layout_alignBaseline="@+id/itemWifiImageView"
+        android:layout_toEndOf="@+id/itemWifiStandard"
         android:layout_alignParentRight="true"
         android:text="TextView" />
 

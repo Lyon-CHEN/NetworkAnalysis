@@ -34,16 +34,18 @@ public class WifiActivity extends AppCompatActivity {
 
     private final int SAMPLE_RATE = 10000;
 
+    private ItemWifiListAdapter listAdapter;
 
 
     private BroadcastReceiver wifiScanResultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "wifi Scan");
-            listWifiScan = wifiManager.getScanResults();
-            if(listWifiScan != null) {
-                ListView listView = findViewById(R.id.wifiListView);
-                listView.setAdapter(new ItemWifiListAdapter(getApplicationContext(), listWifiScan));
+            Boolean wifiScanResult = intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+
+            if(wifiScanResult) {
+                listWifiScan = wifiManager.getScanResults();
+                listAdapter.notifyDataSetChanged();
             }
         }
     };
@@ -62,6 +64,7 @@ public class WifiActivity extends AppCompatActivity {
         if (!wifiManager.isWifiEnabled()) {  //turn-on wifi
             wifiManager.setWifiEnabled(true);
         }
+        listWifiScan = wifiManager.getScanResults();
 
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         StringBuffer mCurrConnStr = new StringBuffer();
@@ -73,6 +76,10 @@ public class WifiActivity extends AppCompatActivity {
         TextView connected_wifi_info = findViewById(R.id.connected_wifi_info);
         connected_wifi_info.setText(mCurrConnStr);
 
+        //init the view adapter for wifiListView which including the items of wifi scan result
+        listAdapter = new ItemWifiListAdapter(context, listWifiScan);
+        ListView listView = findViewById(R.id.wifiListView);
+        listView.setAdapter(listAdapter);
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
@@ -88,4 +95,9 @@ public class WifiActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(wifiScanResultReceiver);
+    }
 }
