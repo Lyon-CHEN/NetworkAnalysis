@@ -23,24 +23,14 @@
         android:layout_marginTop="5dp"
         android:text="@string/wifi_scan_results"
         android:textSize="20sp"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fadingEdge="vertical"
-        android:scrollbars="vertical">
-        <ListView
+
+
+    <ListView
             android:id="@+id/wifiListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView >
-    </ScrollView>
+            android:layout_height="wrap_content">
+    </ListView>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
 
 </LinearLayout>
