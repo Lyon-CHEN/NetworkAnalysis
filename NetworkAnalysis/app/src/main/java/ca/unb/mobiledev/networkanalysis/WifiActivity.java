@@ -32,7 +32,7 @@ public class WifiActivity extends AppCompatActivity {
     private WifiManager wifiManager;
     List<ScanResult> listWifiScan;
 
-    private final int SAMPLE_RATE = 10000;
+    private final int SAMPLE_RATE = 20000;
 
     private ItemWifiListAdapter listAdapter;
 
@@ -42,14 +42,36 @@ public class WifiActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "wifi Scan");
             Boolean wifiScanResult = intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+            Boolean networkIDSChanged = intent.getAction().equals(WifiManager.NETWORK_IDS_CHANGED_ACTION);
+            Boolean networkStateChanged = intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+            Boolean RSSIChanged = intent.getAction().equals(WifiManager.RSSI_CHANGED_ACTION);
+
+            if(networkStateChanged || networkIDSChanged) {
+                updateCurrentWifiStatus();
+            }
 
             if(wifiScanResult) {
                 listWifiScan = wifiManager.getScanResults();
+                listAdapter = new ItemWifiListAdapter(context, listWifiScan);
+                ListView listView = findViewById(R.id.wifiListView);
+                listView.setAdapter(listAdapter);
                 listAdapter.notifyDataSetChanged();
             }
         }
     };
 
+
+    protected  void updateCurrentWifiStatus () {
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        StringBuffer mCurrConnStr = new StringBuffer();
+        mCurrConnStr.append("SSID: ").append(wifiInfo.getSSID()).append("\n");
+        mCurrConnStr.append("MAC Address: ").append(wifiInfo.getBSSID()).append("\n");
+        mCurrConnStr.append("Signal Strength(dBm): ").append(wifiInfo.getRssi()).append("\n");
+        mCurrConnStr.append("speed: ").append(wifiInfo.getLinkSpeed()).append(" ").append(WifiInfo.LINK_SPEED_UNITS);
+
+        TextView connected_wifi_info = findViewById(R.id.connected_wifi_info);
+        connected_wifi_info.setText(mCurrConnStr);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,23 +88,13 @@ public class WifiActivity extends AppCompatActivity {
         }
         listWifiScan = wifiManager.getScanResults();
 
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        StringBuffer mCurrConnStr = new StringBuffer();
-        mCurrConnStr.append("SSID: ").append(wifiInfo.getSSID()).append("\n");
-        mCurrConnStr.append("MAC Address: ").append(wifiInfo.getBSSID()).append("\n");
-        mCurrConnStr.append("Signal Strength(dBm): ").append(wifiInfo.getRssi()).append("\n");
-        mCurrConnStr.append("speed: ").append(wifiInfo.getLinkSpeed()).append(" ").append(WifiInfo.LINK_SPEED_UNITS);
-
-        TextView connected_wifi_info = findViewById(R.id.connected_wifi_info);
-        connected_wifi_info.setText(mCurrConnStr);
-
-        //init the view adapter for wifiListView which including the items of wifi scan result
-        listAdapter = new ItemWifiListAdapter(context, listWifiScan);
-        ListView listView = findViewById(R.id.wifiListView);
-        listView.setAdapter(listAdapter);
+        updateCurrentWifiStatus();
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        intentFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
         registerReceiver(wifiScanResultReceiver, intentFilter);
 
         new Timer().schedule(new TimerTask() {
