@@ -60,6 +60,7 @@ public class WifiActivity extends AppCompatActivity {
         }
     };
 
+
     protected  void updateCurrentWifiStatus () {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         StringBuffer mCurrConnStr = new StringBuffer();
@@ -88,11 +89,6 @@ public class WifiActivity extends AppCompatActivity {
         listWifiScan = wifiManager.getScanResults();
 
         updateCurrentWifiStatus();
-
-        //init the view adapter for wifiListView which including the items of wifi scan result
-        listAdapter = new ItemWifiListAdapter(context, listWifiScan);
-        ListView listView = findViewById(R.id.wifiListView);
-        listView.setAdapter(listAdapter);
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
