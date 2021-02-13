@@ -55,6 +55,8 @@ public class WifiActivity extends AppCompatActivity {
                 listAdapter = new ItemWifiListAdapter(context, listWifiScan);
                 ListView listView = findViewById(R.id.wifiListView);
                 listView.setAdapter(listAdapter);
+                listView.setOnItemClickListener(listAdapter);
+
                 listAdapter.notifyDataSetChanged();
             }
         }
@@ -75,7 +77,7 @@ public class WifiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "onCreate()");
+       // Log.i(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi);
