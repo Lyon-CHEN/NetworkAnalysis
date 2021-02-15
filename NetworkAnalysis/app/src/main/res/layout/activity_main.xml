@@ -1,64 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button_wifi_list"
-        style="@android:style/Widget.Holo.Button"
-        android:layout_width="82dp"
-        android:layout_height="80dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Button"
+    <FrameLayout
+        android:id="@+id/layout_center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+     >
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+     >
+        <Button
+            android:id="@+id/button_wifi"
+            android:text="WIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.ImageButton"/>
+        <Button
+            android:id="@+id/button_search"
+            android:text="SEARCH"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.ImageButton" />
+        <Button
+            android:id="@+id/button_test"
+            android:text="TEST"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.ImageButton"/>
+        <Button
+            android:id="@+id/button_fixer"
+            android:text="FIXER"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.ImageButton"/>
+        <Button
+            android:id="@+id/button_setting"
+            android:text="SETTING"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.ImageButton"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/button_fixer"
-        style="@android:style/Widget.Holo.Button"
-        android:layout_width="82dp"
-        android:layout_height="80dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_setting" />
 
-    <Button
-        android:id="@+id/button_search"
-        style="@android:style/Widget.Holo.Button"
-        android:layout_width="82dp"
-        android:layout_height="80dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_wifi_list" />
 
-    <Button
-        android:id="@+id/button_speed_test"
-        style="@android:style/Widget.Holo.Button"
-        android:layout_width="82dp"
-        android:layout_height="80dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_search" />
 
-    <Button
-        android:id="@+id/button_setting"
-        style="@android:style/Widget.Holo.Button"
-        android:layout_width="82dp"
-        android:layout_height="80dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
