@@ -22,7 +22,7 @@ public class ItemWifiListAdapter extends BaseAdapter implements AdapterView.OnIt
     LayoutInflater inflater;
     List<ScanResult> list;
     Context context;
-    private boolean[] showControl; // control show or invisible
+    private final boolean[] showControl; // control show or invisible
 
 
     public ItemWifiListAdapter(Context context, List<ScanResult> list) {
@@ -60,8 +60,7 @@ public class ItemWifiListAdapter extends BaseAdapter implements AdapterView.OnIt
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
-        view = inflater.inflate(R.layout.item_wifi_list, null);
+        View view = inflater.inflate(R.layout.item_wifi_list, null);
 
         if (showControl[position]) {
             view.findViewById(R.id.itemDetailHiddenArea).setVisibility(View.VISIBLE);
@@ -117,26 +116,25 @@ public class ItemWifiListAdapter extends BaseAdapter implements AdapterView.OnIt
         textView = (TextView) view.findViewById(R.id.itemWifiSignalStrength);
         textView.setText(String.valueOf(Math.abs(scanResult.level)));
 
-        //icon
+        //wifi strength icon
         ImageView imageView = (ImageView) view.findViewById(R.id.itemWifiImageView);
-
         if (Math.abs(scanResult.level) > 100) {
-            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_wifi_strength_poor));
+            imageView.setImageResource(R.drawable.icon_wifi_strength_poor);
         } else if (Math.abs(scanResult.level) > 80) {
-            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_wifi_strength_low));
+            imageView.setImageResource(R.drawable.icon_wifi_strength_low);
         } else if (Math.abs(scanResult.level) > 70) {
-            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_wifi_strength_low));
+            imageView.setImageResource(R.drawable.icon_wifi_strength_low);
         } else if (Math.abs(scanResult.level) > 60) {
-            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_wifi_strength_medium));
+            imageView.setImageResource(R.drawable.icon_wifi_strength_medium);
         } else if (Math.abs(scanResult.level) > 50) {
-            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_wifi_strength_high));
+            imageView.setImageResource(R.drawable.icon_wifi_strength_high);
         } else {
-            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_wifi_strength_high));
+            imageView.setImageResource(R.drawable.icon_wifi_strength_high);
         }
-
-        textView = (TextView) view.findViewById(R.id.itemWifiBSSIDText);
+        //Bssid hidden default
+        textView = view.findViewById(R.id.itemWifiBSSIDText);
         textView.setText(scanResult.BSSID);
-
+        //Bandwidth hidden default
         textView = (TextView) view.findViewById(R.id.itemWifiBandWidthText);
         switch ( scanResult.channelWidth) {
             case ScanResult.CHANNEL_WIDTH_160MHZ:
