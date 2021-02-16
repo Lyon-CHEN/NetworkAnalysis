@@ -12,29 +12,34 @@
 
     <ImageView
         android:id="@+id/itemWifiImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_weight = "0.5"
+        android:padding = "5dp"
         android:src="@drawable/ic_launcher"
         android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/itemWifiSSID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_alignBaseline="@+id/itemWifiImageView"
         android:layout_marginBottom="14dp"
+        android:layout_weight = "1.5"
+        android:padding = "5dp"
         android:layout_toEndOf="@+id/itemWifiImageView"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/itemWifiHz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_alignBaseline="@+id/itemWifiImageView"
-        android:layout_marginLeft="20dp"
         android:layout_marginBottom="14dp"
+        android:layout_weight = "1"
+        android:padding = "5dp"
         android:layout_toEndOf="@+id/itemWifiSSID"
         android:text="TextView" />
 <!--
@@ -59,11 +64,12 @@
 
     <TextView
         android:id="@+id/itemWifiSignalStrength"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_alignBaseline="@+id/itemWifiImageView"
         android:layout_toEndOf="@+id/itemWifiHz"
-        android:layout_marginLeft="20dp"
+        android:layout_weight = "1"
+        android:padding = "5dp"
         android:layout_alignParentRight="true"
         android:text="TextView" />
     </LinearLayout>
