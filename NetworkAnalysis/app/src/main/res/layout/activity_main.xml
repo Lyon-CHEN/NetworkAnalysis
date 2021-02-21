@@ -5,7 +5,8 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/main_bg1">
 
     <FrameLayout
         android:id="@+id/layout_center"
@@ -29,41 +30,41 @@
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="horizontal"
      >
-        <Button
+        <ImageButton
             android:id="@+id/button_wifi"
-            android:text="WIFI"
+            android:src="@drawable/icon_wifi72"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/Widget.AppCompat.ImageButton"/>
-        <Button
+            android:background="@drawable/menu_button_bg"/>
+        <ImageButton
             android:id="@+id/button_search"
-            android:text="SEARCH"
+            android:src="@drawable/icon_search72"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/Widget.AppCompat.ImageButton" />
-        <Button
+            android:background="@drawable/menu_button_bg"/>
+        <ImageButton
             android:id="@+id/button_test"
-            android:text="TEST"
+            android:src="@drawable/icon_timer72"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/Widget.AppCompat.ImageButton"/>
-        <Button
+            android:background="@drawable/menu_button_bg"/>
+        <ImageButton
             android:id="@+id/button_fixer"
-            android:text="FIXER"
+            android:src="@drawable/icon_repairkit72"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/Widget.AppCompat.ImageButton"/>
-        <Button
+            android:background="@drawable/menu_button_bg"/>
+        <ImageButton
             android:id="@+id/button_setting"
-            android:text="SETTING"
+            android:src="@drawable/icon_setting72"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="@style/Widget.AppCompat.ImageButton"/>
+            android:background="@drawable/menu_button_bg"/>
     </LinearLayout>
 
 
