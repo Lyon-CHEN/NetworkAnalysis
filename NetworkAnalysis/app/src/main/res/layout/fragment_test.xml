@@ -1,14 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TestFragment">
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:padding="15dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <Button android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/test_btn"
+        android:text="@string/test_connection"
+        android:layout_marginBottom="10dp"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TEST" />
+        android:text="@string/speedResult"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/speedResult"
+        android:textSize="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/runningBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:visibility="gone"/>
+
+</LinearLayout>
