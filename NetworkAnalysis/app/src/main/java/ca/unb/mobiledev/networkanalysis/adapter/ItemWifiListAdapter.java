@@ -1,4 +1,4 @@
-package ca.unb.mobiledev.networkanalysis;
+package ca.unb.mobiledev.networkanalysis.adapter;
 
 import android.content.Context;
 import android.net.wifi.ScanResult;
@@ -16,6 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import java.util.List;
+
+import ca.unb.mobiledev.networkanalysis.R;
+import ca.unb.mobiledev.networkanalysis.network.NetworkUtil;
 
 public class ItemWifiListAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
     private final static String TAG = "WifiActivity - listview";
@@ -80,9 +83,9 @@ public class ItemWifiListAdapter extends BaseAdapter implements AdapterView.OnIt
 
         //HZ
         textView = (TextView) view.findViewById(R.id.itemWifiHz);
-        if (is24GHz(scanResult.frequency) ){
+        if (NetworkUtil.is24GHz(scanResult.frequency) ){
             textView.setText("2.4G");
-        } else if ( is5GHz(scanResult.frequency) ) {
+        } else if ( NetworkUtil.is5GHz(scanResult.frequency) ) {
             textView.setText("5G");
         } else {
             textView.setText("unknown");
@@ -162,11 +165,5 @@ public class ItemWifiListAdapter extends BaseAdapter implements AdapterView.OnIt
 
 
 
-    public static boolean is24GHz(int frequency) {
-        return frequency> 2400 && frequency < 2500;
-    }
 
-    public static boolean is5GHz(int frequency) {
-        return frequency > 4900 && frequency < 5900;
-    }
 }

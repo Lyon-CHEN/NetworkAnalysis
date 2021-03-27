@@ -1,9 +1,10 @@
 package ca.unb.mobiledev.networkanalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.media.Image;
 import android.os.Bundle;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Initialize fragmentManager and add Transaction
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.layout_center, new WifiFragment()).commit();
 
