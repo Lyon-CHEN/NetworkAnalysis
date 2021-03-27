@@ -2,7 +2,7 @@ package ca.unb.mobiledev.networkanalysis;
 
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -106,9 +106,9 @@ public class TestFragment extends Fragment {
                     message.obj =  (int)percent;
                     message.what = DOWNLOAD_MESSAGE_CODE;
                     handler .sendMessage(message);
-                    Log.v("speedtest", "[PROGRESS] progress : " + (int)percent + "%");
-                    Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
-                    Log.v("speedtest", "[PROGRESS] rate in bit/s   : " + report.getTransferRateBit());
+                    //Log.v("speedtest", "[PROGRESS] progress : " + (int)percent + "%");
+                    //Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
+                    //Log.v("speedtest", "[PROGRESS] rate in bit/s   : " + report.getTransferRateBit());
                 }
             });
 

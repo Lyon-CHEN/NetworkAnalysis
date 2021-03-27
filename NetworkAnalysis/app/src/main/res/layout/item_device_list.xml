@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/device_ip"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding = "5dp"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="15sp"/>
+
+
+    <TextView
+        android:id="@+id/device_mac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding = "5dp"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/device_manufacture"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding = "5dp"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="10sp"
+        />
+
+
+
+
+
+</LinearLayout>

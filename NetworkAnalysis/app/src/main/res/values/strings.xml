@@ -18,4 +18,10 @@
     <string name="test_connection">test</string>
     <string name="connection_class">connection</string>
     <string name="speedResult">Download</string>
+    <string name="unknown">unknown</string>
+    <string name="unknown_manufacture">unknow_manufacture</string>
+    <string name="connect_wifi_please">No wifi Connect</string>
+    <string name="NEIGHBOR_REACHABLE">REACHABLE</string>
+    <string name="NEIGHBOR_INCOMPLETE">INCOMPLETE</string>
+    <string name="local_ip">LocalIP</string>
 </resources>
