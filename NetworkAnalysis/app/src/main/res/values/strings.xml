@@ -12,9 +12,7 @@
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="test_connection">test</string>
     <string name="connection_class">connection</string>
     <string name="speedResult">Download</string>
@@ -24,4 +22,10 @@
     <string name="NEIGHBOR_REACHABLE">REACHABLE</string>
     <string name="NEIGHBOR_INCOMPLETE">INCOMPLETE</string>
     <string name="local_ip">LocalIP</string>
+    <string name="connecting_gateway">Connecting GateWay:</string>
+    <string name="fixer">FIXER</string>
+    <string name="resolving_dns">Resolving DNS(www.google.com):</string>
+    <string name="connecting_dns">Connecting DNS:</string>
+    <string name="connecting_wifi">Connect to Wifi:</string>
+    <string name="connecting_data">Connect to Data:</string>
 </resources>
