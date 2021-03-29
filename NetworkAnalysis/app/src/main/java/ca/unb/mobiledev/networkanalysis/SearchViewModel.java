@@ -18,7 +18,7 @@ import ca.unb.mobiledev.networkanalysis.network.devicescan.DeviceScanManager;
 import ca.unb.mobiledev.networkanalysis.network.devicescan.DeviceScanResult;
 
 public class SearchViewModel extends AndroidViewModel {
-    private DeviceScanManager manager;
+    private DeviceScanManager mManager;
     private MutableLiveData<List<Device>> mDeviceListLiveData ;
     private List<Device> mDeviceList;
     private ExecutorService threadPool;
@@ -28,7 +28,7 @@ public class SearchViewModel extends AndroidViewModel {
         super(application);
         mDeviceList = new ArrayList<Device>();
         threadPool = Executors.newSingleThreadExecutor();
-        manager = new DeviceScanManager(application.getApplicationContext(), new DeviceScanResult() {
+        mManager = new DeviceScanManager(application.getApplicationContext(), new DeviceScanResult() {
             @Override
             public void deviceScanResult(Device device, Integer progress) {
                 if (!mDeviceList.contains(device)) {
@@ -38,7 +38,15 @@ public class SearchViewModel extends AndroidViewModel {
                 mScanProgress.setValue(progress);
             }
         });
-        threadPool.execute(manager);
+        threadPool.execute(mManager);
+    }
+
+    public void stopScan(){
+        mManager.stopScan();
+    }
+
+    public void startScan(){
+        threadPool.execute(mManager);
     }
 
     LiveData<Integer> getProgress () {

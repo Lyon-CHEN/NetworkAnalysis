@@ -3,10 +3,12 @@ package ca.unb.mobiledev.networkanalysis.network;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.DhcpInfo;
+import android.net.DnsResolver;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -42,6 +45,8 @@ public class NetworkUtil {
     private static final String NEIGHBOR_INCOMPLETE="INCOMPLETE";
     private static final String NEIGHBOR_REACHABLE="REACHABLE";
 
+
+
     public static boolean isWifiConnected(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(
@@ -54,6 +59,28 @@ public class NetworkUtil {
 
         return false;
     }
+
+    public static boolean lookupName(String hostname, Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+
+        return  true;
+    }
+
+    public static boolean getDataEnabled(Context context) {
+        try {
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            Method getMobileDataEnabledMethod = tm.getClass().getDeclaredMethod("getDataEnabled");
+            if (null != getMobileDataEnabledMethod) {
+                return (boolean) getMobileDataEnabledMethod.invoke(tm);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 
     public static WifiInfo getWifiInfo(Context context) {
@@ -109,6 +136,18 @@ public class NetworkUtil {
         return gatewayIp;
     }
 
+    public static List<String> getDNSIp(Context context) {
+        List dnsIp = new ArrayList();
+        DhcpInfo dhcpInfo = getDhcpInfo(context);
+        if (dhcpInfo != null) {
+            dnsIp.add(Int2String(dhcpInfo.dns1));
+            if(dhcpInfo.dns2>0)
+                dnsIp.add(Int2String(dhcpInfo.dns2));
+        }
+
+        //Log.d(tag, "gate way ip = " + dnsIp.toString());
+        return dnsIp;
+    }
 
     /**
      * local macAddress
