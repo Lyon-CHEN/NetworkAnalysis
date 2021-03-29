@@ -1,17 +1,18 @@
 <resources>
+    //network
     <string name="app_name">NetworkAnalysis</string>
     <string name="current_connected_wifi">Current connected Wifi</string>
     <string name="wifi_scan_results">Wifi scan results</string>
     <string name="hiddenWifi">HIDDEN</string>
     <string name="title_activity_main">MainActivity</string>
 
-    //MAIN ACTIVITY
+    //setting
+    <string name="setting_auto_update">Auto Update</string>
+    <string name="setting_language">Languages</string>
+    <string name="setting_theme">Themes</string>
+    <string name="setting_notifications">Notifications</string>
 
 
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
 
     <string name="test_connection">test</string>
     <string name="connection_class">connection</string>
