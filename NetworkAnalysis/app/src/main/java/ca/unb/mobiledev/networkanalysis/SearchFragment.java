@@ -65,6 +65,7 @@ public class SearchFragment extends Fragment {
                     R.string.connect_wifi_please,Toast.LENGTH_SHORT).show();
 
         }
+
         mSearchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
         mSearchViewModel.getScanResult().observe(getViewLifecycleOwner(), deviceLiveData -> {
             if(deviceLiveData !=null){
