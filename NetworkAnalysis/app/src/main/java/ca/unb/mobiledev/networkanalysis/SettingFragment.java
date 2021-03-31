@@ -30,7 +30,6 @@ public class SettingFragment extends Fragment {
     private CheckBox auto_update_checkbox;
     private TextView auto_update_tv, language_tv, theme_tv, notification_tv;
     private RelativeLayout auto_update_rl, language_rl, theme_rl, notification_rl;
-    private String[] languages = {"English", "简体中文", "日本語"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,9 +47,15 @@ public class SettingFragment extends Fragment {
 
 
         language_rl.setOnClickListener(v -> {
-            Toast.makeText(view.getContext(), "YOSSDSDA",Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), "进入语言选择",Toast.LENGTH_SHORT).show();
             Intent languageIntent = new Intent( getContext(), SettingLanguages.class);
             startActivity(languageIntent);
+        });
+
+        theme_rl.setOnClickListener(v -> {
+            Toast.makeText(view.getContext(), "进入主题选择",Toast.LENGTH_SHORT).show();
+            Intent ThemeIntent = new Intent( getContext(), SettingThemes.class);
+            startActivity(ThemeIntent);
         });
 
 

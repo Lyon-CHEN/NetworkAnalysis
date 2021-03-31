@@ -33,4 +33,13 @@
         android:layout_marginTop="15dp"
         android:visibility="gone"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ca.unb.mobiledev.networkanalysis.radarview.RadarView
+            android:id="@+id/radarView"
+            android:layout_width="800px"
+            android:layout_height="800px"
+            />
+    </RelativeLayout>
 </LinearLayout>

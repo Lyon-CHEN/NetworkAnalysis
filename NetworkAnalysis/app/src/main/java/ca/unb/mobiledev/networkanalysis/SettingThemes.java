@@ -16,39 +16,38 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
-public class SettingLanguages extends AppCompatActivity {
+public class SettingThemes extends AppCompatActivity {
     ListView listView;
-    private String[] languages = {"English", "简体中文", "日本語"};
-
-//    public static final Locale LOCALE_CHINESE = Locale.CHINESE;
-//    public static final Locale LOCALE_ENGLISH = Locale.ENGLISH;
+    private String[] themes = {"Purple&Green", "Blue&White", "Orange&Black"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_setting_languages);
+        setContentView(R.layout.fragment_setting_themes);
 
-        listView = findViewById(R.id.language_lv);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, languages);
+        listView = findViewById(R.id.theme_lv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, themes);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String lang = languages[i];
+                String lang = themes[i];
                 switch (i){
                     case 0:
-                        changeAppLanguage(Locale.ENGLISH);
+                        changeAppTheme();
                     case 1:
-                        changeAppLanguage(Locale.CHINESE);
+                        changeAppTheme();
+                    case 2:
+                        changeAppTheme();
                 }
-                Toast.makeText(SettingLanguages.this ,lang,Toast.LENGTH_LONG).show();
+                Toast.makeText(SettingThemes.this ,lang,Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    public void changeAppLanguage(Locale locale) {
+    public void changeAppTheme() {
         finish();
-        return;
+        return ;
     }
 }

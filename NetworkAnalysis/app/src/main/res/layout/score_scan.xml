@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="800px"
+    android:layout_height="800px"
+    android:orientation="vertical"
+    >
+    <ca.unb.mobiledev.networkanalysis.radarview.RadarView
+    android:id="@+id/check_radar_view"
+    android:layout_width="800px"
+    android:layout_height="800px"
+    />
+
+</RelativeLayout>

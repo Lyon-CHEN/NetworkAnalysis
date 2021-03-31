@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="trans_white">#80FFFFFF</color>
+    <color name="wifi_acclerate_green">#15B96B</color>
+    <color name="wifi_acclerate_orange">#F29336</color>
+    <color name="wifi_acclerate_red">#EC6066</color>
 </resources>

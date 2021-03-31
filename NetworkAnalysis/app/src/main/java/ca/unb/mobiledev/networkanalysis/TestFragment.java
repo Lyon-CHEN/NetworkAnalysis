@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import java.math.BigDecimal;
 
+import ca.unb.mobiledev.networkanalysis.radarview.RadarView;
 import fr.bmartel.speedtest.SpeedTestReport;
 import fr.bmartel.speedtest.SpeedTestSocket;
 import fr.bmartel.speedtest.inter.ISpeedTestListener;
@@ -29,6 +30,7 @@ public class TestFragment extends Fragment {
     private TextView speedResult;
     private ProgressBar runningBar;
     static Handler  handler;
+    private RadarView radarView;
 
     public static final int DOWNLOAD_MESSAGE_CODE = 100001;
     public static final int DOWNLOAD_MESSAGE_FAIL_CODE = 100002;
@@ -38,6 +40,10 @@ public class TestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         TestFragmentView = inflater.inflate(R.layout.fragment_test, container, false);
+
+        radarView = TestFragmentView.findViewById(R.id.radarView);
+        radarView.setDirection(RadarView.ANTI_CLOCK_WISE);
+        radarView.start();
 
         speedResult = TestFragmentView.findViewById(R.id.speedResult);
         runningBar = TestFragmentView.findViewById(R.id.runningBar);
