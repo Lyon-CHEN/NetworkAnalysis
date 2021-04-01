@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 import androidx.annotation.Nullable;
@@ -45,7 +47,7 @@ public class SearchFragment extends Fragment {
 
     private SearchViewModel mSearchViewModel;
     private RadarView vRadarView;
-    private Button vSerachBtn;
+    private ToggleButton vSerachBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vSearchFragmentView = inflater.inflate(R.layout.fragment_search, container, false);
@@ -53,7 +55,7 @@ public class SearchFragment extends Fragment {
         vRadarView = vSearchFragmentView.findViewById(R.id.search_radar_view);
         vRadarView.setDirection(RadarView.ANTI_CLOCK_WISE);
         vRadarView.start();
-        vSerachBtn =vSearchFragmentView.findViewById(R.id.searchBtn);
+
         mDeviceListView = vSearchFragmentView.findViewById(R.id.device_list);
         mProgressBar = vSearchFragmentView.findViewById(R.id.searchProgressBar);
 
@@ -90,17 +92,27 @@ public class SearchFragment extends Fragment {
 
         });
 
-        vSerachBtn.setOnClickListener(
-                new View.OnClickListener() {
+        vSerachBtn =vSearchFragmentView.findViewById(R.id.search_ToggleButton);
 
-                    @Override
-                    public void onClick(View v) {
-                         mSearchViewModel.stopScan();
-                         vRadarView.stop();
-                    }
+        vSerachBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mSearchViewModel.stopScan();
+                    vRadarView.stop();
+                } else {
+                    mSearchViewModel.startScan();
+                    vRadarView.start();
                 }
-        );
+            }
+        });
 
         return vSearchFragmentView;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        vSerachBtn.setChecked(true);
+        mSearchViewModel.stopScan();
     }
 }

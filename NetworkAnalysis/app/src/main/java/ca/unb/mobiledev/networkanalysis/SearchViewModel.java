@@ -39,6 +39,7 @@ public class SearchViewModel extends AndroidViewModel {
             }
         });
         threadPool.execute(mManager);
+        startScan();
     }
 
     public void stopScan(){
@@ -46,7 +47,8 @@ public class SearchViewModel extends AndroidViewModel {
     }
 
     public void startScan(){
-        threadPool.execute(mManager);
+        mDeviceList.clear();
+        mManager.startScan();
     }
 
     LiveData<Integer> getProgress () {

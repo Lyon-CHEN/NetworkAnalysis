@@ -27,6 +27,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -46,48 +47,61 @@ public class DeviceScanManager implements Runnable
     private static Iterator mIpScanIterator = mIpInLan.iterator();
     private DeviceScanResult mScanResult;
     private Integer mProgress;
-    private ExecutorService mExecutor;
+    private ThreadPoolExecutor  mExecutor;
     private Context mContext;
-
-    public static final int  MESSAGE_SCAN_ONE = 200001;
+    volatile int mRun = 0;  //0==stop,1==run,2==final
+    private static int count=0;
 
     public DeviceScanManager(Context context, DeviceScanResult scanResult) {
         mScanResult = scanResult;
         mContext = context;
         mProgress = 0;
-    }
 
+        if(Looper.myLooper() ==null) {
+            Looper.prepare();
+            Looper.myLooper();
+        }
 
-    @Override
-    public void run() {
-        Looper.prepare();
-        Looper.myLooper();
-        startScan();
-    }
-
-    public void startScan()
-    {
-        List<Device> deviceList;
         String localIp = NetworkUtil.getLocalIp();
         String routerIp = NetworkUtil.getGateWayIp(mContext);
         if (TextUtils.isEmpty(localIp) || TextUtils.isEmpty(routerIp))
             return;
         mIpInLan.addAll(NetworkUtil.getSubnet(localIp,true));
-
         //init a thread pool
-        mExecutor= Executors.newFixedThreadPool(Constant.SCAN_COUNT);
+        mExecutor=  new ThreadPoolExecutor(Constant.SCAN_COUNT, Constant.SCAN_COUNT, 0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
+    }
 
-        for (String mIP : mIpInLan) {
-            ScanTasks mScanTask = new ScanTasks(mIP,mDeviceScanManagerHandler);
-            mExecutor.submit(mScanTask);
-        }
+
+
+    @Override
+    public void run() {
+
+
+
         //waiting for all task completed
-        mExecutor.shutdown();
+
 
         while (!mExecutor.isTerminated()) {
             try {
+                if(mRun ==1){
+                    String mIP = (String) mIpInLan.get(count);
+
+                    if(!mExecutor.isShutdown()) {
+                        ScanTasks mScanTask = new ScanTasks(mIP,mDeviceScanManagerHandler);
+                        mExecutor.submit(mScanTask);
+                        count++;
+                    }
+
+                } else if(mRun ==2){
+                    count=0;
+                    mIpInLan.clear();
+                    String localIp = NetworkUtil.getLocalIp();
+                    mIpInLan.addAll(NetworkUtil.getSubnet(localIp,true));
+                    mRun =0;
+                }
                 Thread.sleep(1000);
-                mProgress++;
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -95,12 +109,18 @@ public class DeviceScanManager implements Runnable
         mProgress = Constant.PROGRESS_MAX;
     }
 
+    public void startScan(){
+        mDeviceScanManagerHandler.sendMessage(
+                mDeviceScanManagerHandler.obtainMessage(
+                        Constant.MSG.START) );
+    }
+
+
     public void stopScan()
     {
-        if (mExecutor != null)
-        {
-            mExecutor.shutdownNow();
-        }
+        mDeviceScanManagerHandler.sendMessage(
+                mDeviceScanManagerHandler.obtainMessage(
+                        Constant.MSG.STOP) );
     }
 
     private String parseHostInfo(String mac) {
@@ -159,6 +179,9 @@ public class DeviceScanManager implements Runnable
                                 mDeviceScanManagerHandler.obtainMessage(
                                         Constant.MSG.SCAN_ONE, mDevice));
                     }
+                    mDeviceScanManagerHandler.sendMessage(
+                            mDeviceScanManagerHandler.obtainMessage(
+                                    Constant.MSG.SCAN_OVER) );
                 }
 
             } catch (FileNotFoundException e) {
@@ -204,6 +227,13 @@ public class DeviceScanManager implements Runnable
                     }
                     break;
                 case Constant.MSG.SCAN_OVER :
+                    manager.mProgress++;
+                    break;
+                case Constant.MSG.START :
+                    manager.mRun = 1;
+                    break;
+                case Constant.MSG.STOP :
+                    manager.mRun =2;
                     break;
             }
         }
