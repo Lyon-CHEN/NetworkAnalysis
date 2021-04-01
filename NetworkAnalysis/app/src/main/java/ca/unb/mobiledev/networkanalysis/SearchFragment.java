@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,12 +30,13 @@ import ca.unb.mobiledev.networkanalysis.network.Device;
 import ca.unb.mobiledev.networkanalysis.network.NetworkUtil;
 import ca.unb.mobiledev.networkanalysis.network.devicescan.DeviceScanManager;
 import ca.unb.mobiledev.networkanalysis.network.devicescan.DeviceScanResult;
+import ca.unb.mobiledev.networkanalysis.radarview.RadarView;
 
 
 public class SearchFragment extends Fragment {
     private final static String TAG = "SearchFragment";
 
-    private View SearchFragmentView;
+    private View vSearchFragmentView;
     private Context mContext;
     private RecyclerView mDeviceListView;
     private SearchDeviceListAdapter mDeviceListAdapter;
@@ -42,15 +44,21 @@ public class SearchFragment extends Fragment {
     private TextView tLocalIP;
 
     private SearchViewModel mSearchViewModel;
-
-
+    private RadarView vRadarView;
+    private Button vSerachBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        SearchFragmentView = inflater.inflate(R.layout.fragment_search, container, false);
-        mDeviceListView = SearchFragmentView.findViewById(R.id.device_list);
-        mProgressBar = SearchFragmentView.findViewById(R.id.searchProgressBar);
+        vSearchFragmentView = inflater.inflate(R.layout.fragment_search, container, false);
+
+        vRadarView = vSearchFragmentView.findViewById(R.id.search_radar_view);
+        vRadarView.setDirection(RadarView.ANTI_CLOCK_WISE);
+        vRadarView.start();
+        vSerachBtn =vSearchFragmentView.findViewById(R.id.searchBtn);
+        mDeviceListView = vSearchFragmentView.findViewById(R.id.device_list);
+        mProgressBar = vSearchFragmentView.findViewById(R.id.searchProgressBar);
+
+        tLocalIP = vSearchFragmentView.findViewById(R.id.localIp);
         mContext = container.getContext();
-        tLocalIP = SearchFragmentView.findViewById(R.id.localIp);
 
         StringBuffer mCurrConnStr = new StringBuffer();
         mCurrConnStr.append("Local IP: ").append( NetworkUtil.getLocalIp()).append("\n");
@@ -82,8 +90,17 @@ public class SearchFragment extends Fragment {
 
         });
 
+        vSerachBtn.setOnClickListener(
+                new View.OnClickListener() {
 
+                    @Override
+                    public void onClick(View v) {
+                         mSearchViewModel.stopScan();
+                         vRadarView.stop();
+                    }
+                }
+        );
 
-        return SearchFragmentView;
+        return vSearchFragmentView;
     }
 }

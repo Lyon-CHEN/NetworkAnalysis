@@ -19,7 +19,7 @@ import ca.unb.mobiledev.networkanalysis.adapter.SearchDeviceListAdapter;
 public class FixerFragment extends Fragment {
     private final static String TAG = "FixerFragment";
 
-    private View FixerFragmentView;
+    private View vFixerFragmentView;
     private Context mContext;
     private RecyclerView mDeviceListView;
     private SearchDeviceListAdapter mDeviceListAdapter;
@@ -35,15 +35,15 @@ public class FixerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FixerFragmentView = inflater.inflate(R.layout.fragment_fixer, container, false);
+        vFixerFragmentView = inflater.inflate(R.layout.fragment_fixer, container, false);
 
-        mProgressBar = FixerFragmentView.findViewById(R.id.checkProgressBar);
+        mProgressBar = vFixerFragmentView.findViewById(R.id.checkProgressBar);
         mContext = container.getContext();
-        tCheckWifi = FixerFragmentView.findViewById(R.id.connecting_wifi);
-        tCheckData = FixerFragmentView.findViewById(R.id.connecting_data);
-        tCheckGateway = FixerFragmentView.findViewById(R.id.connecting_Gateway);
-        tCheckDns = FixerFragmentView.findViewById(R.id.connecting_DNS);
-        tCheckResolvingDNS = FixerFragmentView.findViewById(R.id.connection_ResolvingDNS);
+        tCheckWifi = vFixerFragmentView.findViewById(R.id.connecting_wifi);
+        tCheckData = vFixerFragmentView.findViewById(R.id.connecting_data);
+        tCheckGateway = vFixerFragmentView.findViewById(R.id.connecting_Gateway);
+        tCheckDns = vFixerFragmentView.findViewById(R.id.connecting_DNS);
+        tCheckResolvingDNS = vFixerFragmentView.findViewById(R.id.connection_ResolvingDNS);
 
         mFixerViewModel = new ViewModelProvider(requireActivity()).get(FixerViewModel.class);
         mFixerViewModel.getConnectingWifi().observe(getViewLifecycleOwner(),  isWifiConnected-> {
@@ -69,6 +69,6 @@ public class FixerFragment extends Fragment {
 
         mFixerViewModel.startCheck();
 
-        return FixerFragmentView;
+        return vFixerFragmentView;
     }
 }

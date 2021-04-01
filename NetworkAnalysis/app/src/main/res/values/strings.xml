@@ -16,7 +16,7 @@
 
     <string name="test_connection">test</string>
     <string name="connection_class">connection</string>
-    <string name="speedResult">Download</string>
+    <string name="testDownloadResult">Download</string>
     <string name="unknown">unknown</string>
     <string name="unknown_manufacture">unknow_manufacture</string>
     <string name="connect_wifi_please">No wifi Connect</string>
@@ -29,4 +29,6 @@
     <string name="connecting_dns">Connecting DNS:</string>
     <string name="connecting_wifi">Connect to Wifi:</string>
     <string name="connecting_data">Connect to Data:</string>
+    <string name="testUploadResult">Upload</string>
+    <string name="search_control">Stop</string>
 </resources>

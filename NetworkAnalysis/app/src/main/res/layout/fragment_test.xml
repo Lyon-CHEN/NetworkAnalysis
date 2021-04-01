@@ -7,32 +7,56 @@
 
     <Button android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:id="@+id/test_btn"
+        android:id="@+id/testBtn"
         android:text="@string/test_connection"
         android:layout_marginBottom="10dp"/>
 
     <TextView
-        android:text="@string/speedResult"
+        android:text="@string/testDownloadResult"
         android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
 
     <TextView
-        android:id="@+id/speedResult"
+        android:id="@+id/testDownloadResult"
         android:textSize="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <ProgressBar
-        android:id="@+id/runningBar"
-        style="?android:attr/progressBarStyleLarge"
+        android:id="@+id/testDownloadProgressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:visibility="gone"/>
+         />
 
+    <TextView
+        android:text="@string/testUploadResult"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/testUploadResult"
+        android:textSize="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/testUploadProgressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+         />
+
+<!--
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -41,5 +65,5 @@
             android:layout_width="800px"
             android:layout_height="800px"
             />
-    </RelativeLayout>
+    </RelativeLayout>-->
 </LinearLayout>

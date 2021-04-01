@@ -22,7 +22,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text=""/>
-
+        <Button android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/searchBtn"
+            android:text="@string/search_control"
+            android:layout_marginBottom="10dp"/>
         <ProgressBar
             android:id="@+id/searchProgressBar"
             android:minHeight="20dip"
@@ -30,14 +34,25 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@android:style/Widget.ProgressBar.Horizontal" />
-
-        <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/device_list"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="GridLayoutManager"
-            tools:listitem="@layout/item_device_list" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <ca.unb.mobiledev.networkanalysis.radarview.RadarView
+                android:id="@+id/search_radar_view"
+                android:layout_width="370dp"
+                android:layout_height="372dp" />
+            <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/device_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="GridLayoutManager"
+                tools:listitem="@layout/item_device_list" />
+        </RelativeLayout>
     </LinearLayout >
+
 </FrameLayout>
