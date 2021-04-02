@@ -54,7 +54,6 @@ public class SearchFragment extends Fragment {
 
         vRadarView = vSearchFragmentView.findViewById(R.id.search_radar_view);
         vRadarView.setDirection(RadarView.ANTI_CLOCK_WISE);
-        vRadarView.start();
 
         mDeviceListView = vSearchFragmentView.findViewById(R.id.device_list);
         mProgressBar = vSearchFragmentView.findViewById(R.id.searchProgressBar);
@@ -67,7 +66,7 @@ public class SearchFragment extends Fragment {
         mCurrConnStr.append("GateWay IP: ").append(NetworkUtil.getGateWayIp(mContext));
 
         tLocalIP.setText(mCurrConnStr);
-        mProgressBar.setMax(Constant.PROGRESS_MAX);
+        mProgressBar.setMax(Constant.IP_COUNT);
         mProgressBar.setProgress(0);
 
         if (!NetworkUtil.isWifiConnected(mContext)) {
@@ -109,5 +108,18 @@ public class SearchFragment extends Fragment {
         return vSearchFragmentView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSearchViewModel.startScan();
+        vRadarView.start();
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mSearchViewModel.stopScan();
+        vRadarView.stop();
+    }
 }

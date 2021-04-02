@@ -231,6 +231,7 @@ public class DeviceScanManager implements Runnable
                     break;
                 case Constant.MSG.START :
                     manager.mRun = 1;
+                    mProgress=0;
                     break;
                 case Constant.MSG.STOP :
                     manager.mRun =2;

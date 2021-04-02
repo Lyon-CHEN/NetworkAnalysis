@@ -53,6 +53,8 @@ public class WifiFragment extends Fragment {
         mContext = container.getContext();
         mWifiViewModel = new ViewModelProvider(requireActivity()).get(WifiViewModel.class);
         mWifiViewModel.getWifiScanResult().observe(getViewLifecycleOwner(),ScanResult->{
+            updateCurrentWifiStatus();
+
             listAdapter = new ItemWifiListAdapter(mContext, ScanResult);
             ListView listView = vWifiFragment.findViewById(R.id.wifiListView);
 
@@ -61,6 +63,11 @@ public class WifiFragment extends Fragment {
 
             listAdapter.notifyDataSetChanged();
         });
+
+        mWifiViewModel.getRefresh().observe(getViewLifecycleOwner(), isRefresh ->{
+            updateCurrentWifiStatus();
+        });
+
         updateCurrentWifiStatus();
         return vWifiFragment;
     }

@@ -39,6 +39,10 @@ public class WifiViewModel extends AndroidViewModel {
         return mWifiScanResult;
     }
 
+    public MutableLiveData<Boolean> getRefresh(){
+        return mRefresh;
+    }
+
     public WifiViewModel(@NonNull Application application) {
         super(application);
 
@@ -76,7 +80,7 @@ public class WifiViewModel extends AndroidViewModel {
             Boolean RSSIChanged = intent.getAction().equals(WifiManager.RSSI_CHANGED_ACTION);
 
             if(networkStateChanged || networkIDSChanged) {
-
+                mRefresh.setValue(true);
             }
 
             if(wifiScanResult) {

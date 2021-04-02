@@ -39,7 +39,6 @@ public class SearchViewModel extends AndroidViewModel {
             }
         });
         threadPool.execute(mManager);
-        startScan();
     }
 
     public void stopScan(){
