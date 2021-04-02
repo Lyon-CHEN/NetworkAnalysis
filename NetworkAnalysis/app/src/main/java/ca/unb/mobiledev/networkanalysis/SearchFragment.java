@@ -109,10 +109,5 @@ public class SearchFragment extends Fragment {
         return vSearchFragmentView;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        vSerachBtn.setChecked(true);
-        mSearchViewModel.stopScan();
-    }
+
 }

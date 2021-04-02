@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         setContentView(R.layout.activity_main);
         //Initialize fragmentManager and add Transaction
         FragmentManager fragmentManager = getSupportFragmentManager();
