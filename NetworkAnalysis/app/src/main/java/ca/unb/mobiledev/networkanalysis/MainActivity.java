@@ -3,6 +3,8 @@ package ca.unb.mobiledev.networkanalysis;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.Manifest;
 import android.media.Image;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 currentScope = Scope.SETTING;
             }
         });
+
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 100);
     }
 
     private void refreshImageButtons(){
