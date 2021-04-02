@@ -72,7 +72,6 @@ public class SearchFragment extends Fragment {
         if (!NetworkUtil.isWifiConnected(mContext)) {
             Toast.makeText(mContext,
                     R.string.connect_wifi_please,Toast.LENGTH_SHORT).show();
-
         }
 
         mSearchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);

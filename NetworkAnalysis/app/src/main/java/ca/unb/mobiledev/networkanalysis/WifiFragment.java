@@ -77,6 +77,7 @@ public class WifiFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         if (!NetworkUtil.isWifiConnected(mContext)) {
             Toast.makeText(mContext,
                     R.string.connect_wifi_please,Toast.LENGTH_SHORT).show();
