@@ -4,12 +4,12 @@
 ###  WiFi scanning: 
 	 * Get the WiFi SSID access points around the android device
 	 * Collect information: SSID, WiFi signal strength, channel and encryption method.
-### 2 Device scanning: 
+###  Device scanning: 
 	* Scan all alive devices which under the wifi your android device is located and connected. 
 	* Identify the device's manufacturer base on Mac address.
-### 3 Speed test:
+### Speed test:
 	* Test the upload and download speed under the current network connection through JSpeedTest Lib.
-### 4 Network diagnosis
+### Network diagnosis
 	* Connectivity to gateway
 	* Connectivity to DNS Server
 	* Resovling Domain name(default:www.google.com)
