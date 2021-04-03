@@ -117,12 +117,11 @@ public class DeviceScanManager implements Runnable
             return false;
         String searchKey = mac.substring(0, 2) + mac.substring(3, 5) + mac.substring(6, 8);
         Item item = manufRepository.searchManufacture(searchKey.toUpperCase());
+        if(item == null)
+            return false;
 
-        String vendor = item.getOrganizationName().length()>0 ? item.getOrganizationName() : "UnKnown" ;
-        String vendor_address = item.getOrganizationAddress().length()>0 ? item.getOrganizationAddress() : " " ;
-
-        device.setVendor(vendor);
-        device.setAddress(vendor_address);
+        device.setVendor(item.getOrganizationName());
+        device.setAddress(item.getOrganizationAddress());
 
         return true;
     }

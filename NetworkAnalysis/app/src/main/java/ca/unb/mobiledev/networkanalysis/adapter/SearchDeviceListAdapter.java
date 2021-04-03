@@ -26,13 +26,11 @@ public class SearchDeviceListAdapter extends RecyclerView.Adapter<RecyclerView.V
     private List<Device> mDeviceList;
     private String mLocalIp;
     private String mGateIp;
-    private final boolean[] showControl;
 
     public SearchDeviceListAdapter(Context context, List<Device> list)
     {
         this.mContext = context;
         this.mDeviceList = list;
-        this.showControl = new boolean[list.size()+1]; //add head
        // this.mLocalIp = localIp;
        // this.mGateIp = gateip;
 
@@ -50,22 +48,26 @@ public class SearchDeviceListAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private boolean isPositionHeader(int position) {
-        return position == 0;
+        return false;
+        //return position == 0;
     }
 
     private boolean isPositionFooter(int position) {
-        return position > mDeviceList.size();
+        return false;
+        //return position > mDeviceList.size();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder view=null;
-        if (viewType == TYPE_ITEM) {
+        /*if (viewType == TYPE_ITEM) {
             view = new DeviceHolder(LayoutInflater.from(mContext).inflate(
                     R.layout.item_device_list, parent, false));
         } else if (viewType == TYPE_HEADER) {
             view = new HeaderViewHolder( LayoutInflater.from(mContext).inflate(R.layout.item_device_list_head, parent, false) );
-        }
+        }*/
+        view = new DeviceHolder(LayoutInflater.from(mContext).inflate(
+                R.layout.item_device_list, parent, false));
        return view;
     }
 
@@ -77,10 +79,10 @@ public class SearchDeviceListAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((HeaderViewHolder) holder).mDeviceMacHead.setText("Mac Address:   ");
             ((HeaderViewHolder) holder).mDeviceManufactureHead.setText("Manufacture:");
         } else if ( holder instanceof DeviceHolder) {
-            Device device = mDeviceList.get(position-1);
+            Device device = mDeviceList.get(position);
             if (device != null) {
-                ((DeviceHolder) holder).mDeviceIp.setText(device.Ip);
-                ((DeviceHolder) holder).mDeviceMac.setText(device.macAddress);
+                ((DeviceHolder) holder).mDeviceIp.setText("IP: "+device.Ip);
+                ((DeviceHolder) holder).mDeviceMac.setText("Mac Addr: "+device.macAddress);
                 //holder.mDeviceName.setText("");
            /* if (ip_mac.ip.equals(mLocalIp))
             {
@@ -95,8 +97,7 @@ public class SearchDeviceListAdapter extends RecyclerView.Adapter<RecyclerView.V
             {
                 holder.mDeviceName.setText(ip_mac.mDeviceName);
             }*/
-                String vendor = device.vendor.length() > 10 ? device.vendor.substring(0, 10) : device.vendor;
-                ((DeviceHolder) holder).mDeviceManufacture.setText(vendor);
+                //String vendor = device.vendor.length() > 10 ? device.vendor.substring(0, 10) : device.vendor;
                 ((DeviceHolder) holder).mDeviceManufactureFullName.setText(device.vendor);
                 ((DeviceHolder) holder).mDeviceManufactureAddress.setText(device.address);
 
@@ -107,7 +108,7 @@ public class SearchDeviceListAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemCount()
     {
-        return mDeviceList.size()+1;
+        return mDeviceList.size();
     }
 
     @Override
@@ -152,7 +153,6 @@ public class SearchDeviceListAdapter extends RecyclerView.Adapter<RecyclerView.V
         TextView mDeviceIp;
         TextView mDeviceMac;
         TextView mDeviceName;
-        TextView mDeviceManufacture;
         TextView mDeviceManufactureAddress;
         TextView mDeviceManufactureFullName;
 
@@ -162,8 +162,7 @@ public class SearchDeviceListAdapter extends RecyclerView.Adapter<RecyclerView.V
             mDeviceIp = (TextView) itemView.findViewById(R.id.device_ip);
             mDeviceMac = (TextView) itemView.findViewById(R.id.device_mac);
             //mDeviceName = (TextView) itemView.findViewById(R.id.device_name);
-            mDeviceManufacture = (TextView) itemView
-                    .findViewById(R.id.device_manufacture);
+
             mDeviceManufactureAddress = (TextView) itemView
                     .findViewById(R.id.device_manufacture_address);
             mDeviceManufactureFullName = (TextView) itemView
