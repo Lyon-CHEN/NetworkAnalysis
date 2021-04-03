@@ -19,13 +19,20 @@ public class ManufRepository {
         itemDao = db.itemDao();
     }
 
-    public String searchManufacture(String searchKey){
-        String searchResult = null;
-        List<Item> manufList = itemDao.searchRecords( searchKey);
-
-        if(manufList.size()>0)
-            searchResult = manufList.get(0).getOrganizationName();
-
-        return searchResult;
+    public Item searchManufacture(String searchKey){
+        Item searchResult = null;
+        Future<List<Item>> future  = Manufacture.databaseWriterExecutor.submit(new Callable<List<Item>>() {
+            public List<Item> call() throws Exception {
+                return  itemDao.searchRecords( searchKey);
+            }
+        });
+        try{
+            List<Item> manufList = future.get();
+            if(manufList.size()>0)
+                searchResult = manufList.get(0);
+        }catch (Exception e){
+            Log.e(Tag, e.getMessage());
+        }
+       return searchResult;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Dao
 public interface ItemDao {
 
-    @Query("SELECT * from oui where assignment Like '%' || :searchKey || '%' COLLATE NOCASE ")
+    @Query("SELECT * from oui where assignment Like '%' || :searchKey || '%' LIMIT  1 ")
     List<Item> searchRecords(String searchKey);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

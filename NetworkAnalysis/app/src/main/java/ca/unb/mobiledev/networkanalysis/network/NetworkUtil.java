@@ -259,7 +259,7 @@ public class NetworkUtil {
                         }
                         if (isReachable) {
                         */
-                            result.add(new Device(ip, macAddress, ""));
+                            result.add(new Device(ip, macAddress));
                         //}
                     }
                 }
@@ -281,7 +281,7 @@ public class NetworkUtil {
                             e.printStackTrace();
                         }
                         if (isReachable) {
-                            result.add(new Device(ip, macAddress,""));
+                            result.add(new Device(ip, macAddress));
                         }
                     }
 
