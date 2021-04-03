@@ -19,13 +19,14 @@
 	- Theme
 ***
 ## Compatibility
-- Platform
+- Platform:
 	Compile with: Android Studio 4.1.1 & Java 1.8
 	Java 1.8
 	
-- Supported API levels
+- Supported API levels:
 	Android 10, API Level 29
-	Test on:  RedMI Note8 Pro. 
+- Test on:  
+	RedMI Note8 Pro. 
 ***
 ## Key Technology
 - WiFi scanning: 
@@ -36,6 +37,8 @@
 ## Architecture
 ***
 ## Todo list
+-[]
+
 ***
 ## Changlog
 
