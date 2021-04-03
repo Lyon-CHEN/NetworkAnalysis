@@ -36,6 +36,6 @@
 
 
 ## External libraries
-JSpeedTest: https://github.com/bertrandmartel/speed-test-lib
+JSpeedTest: https://github.com/bertrandmartel/speed-test-lib</br>
 WiFiDetective: https://github.com/gpfduoduo/WiFiDetective
 
