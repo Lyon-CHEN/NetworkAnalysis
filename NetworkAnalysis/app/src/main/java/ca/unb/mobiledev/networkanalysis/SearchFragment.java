@@ -19,6 +19,7 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import ca.unb.mobiledev.networkanalysis.adapter.RecyclerItemClickListener;
 import ca.unb.mobiledev.networkanalysis.adapter.SearchDeviceListAdapter;
 import ca.unb.mobiledev.networkanalysis.network.Constant;
 import ca.unb.mobiledev.networkanalysis.network.Device;
@@ -56,6 +58,8 @@ public class SearchFragment extends Fragment {
         vRadarView.setDirection(RadarView.ANTI_CLOCK_WISE);
 
         mDeviceListView = vSearchFragmentView.findViewById(R.id.device_list);
+        mDeviceListView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+
         mProgressBar = vSearchFragmentView.findViewById(R.id.searchProgressBar);
 
         tLocalIP = vSearchFragmentView.findViewById(R.id.localIp);
@@ -78,7 +82,20 @@ public class SearchFragment extends Fragment {
         mSearchViewModel.getScanResult().observe(getViewLifecycleOwner(), deviceLiveData -> {
             if(deviceLiveData !=null){
                 mDeviceListAdapter = new SearchDeviceListAdapter(mContext,deviceLiveData);
+
                 mDeviceListView.setAdapter(mDeviceListAdapter);
+                mDeviceListView.addOnItemTouchListener(new RecyclerItemClickListener(mDeviceListView) {
+                    @Override
+                    public void onItemClick(RecyclerView.ViewHolder vh) {
+
+
+                    }
+
+                    @Override
+                    public void onItemLongClick(RecyclerView.ViewHolder vh) {
+
+                    }
+                });
             }
             mDeviceListAdapter.notifyDataSetChanged();
         });

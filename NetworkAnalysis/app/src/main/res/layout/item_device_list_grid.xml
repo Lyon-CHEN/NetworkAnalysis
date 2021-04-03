@@ -12,9 +12,9 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:padding = "5dp"
-            android:gravity="left"
+            android:gravity="center"
             android:layout_weight = "1"
-
+            android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:textSize="15sp"/>
 
@@ -24,16 +24,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding = "5dp"
-            android:gravity="left"
+            android:gravity="center"
             android:layout_weight = "1"
+            android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/device_manufacture"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding = "5dp"
+            android:layout_weight = "1"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textSize="15sp"
+            />
     </LinearLayout>
     <RelativeLayout
+        android:id="@+id/device_DetailHiddenArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        >
+        android:padding="10dp"
+        android:visibility = "gone">
 
         <TextView
             android:id="@+id/device_manufacture_fullName"
