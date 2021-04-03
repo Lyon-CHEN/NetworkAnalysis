@@ -14,7 +14,7 @@
 	* Connectivity to DNS Server
 	* Resovling Domain name(default:www.google.com)
 	
-### 5 Setting
+### Setting
 	* Language support:
 	* Theme
 
