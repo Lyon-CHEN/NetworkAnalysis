@@ -13,10 +13,25 @@
     <string name="setting_language">语言</string>
     <string name="setting_theme">主题</string>
     <string name="setting_notifications">通知</string>
+    <string name="setting_theme_one">远海</string>
+    <string name="setting_theme_two">气泡水</string>
 
     //test
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="test_connection">测试</string>
     <string name="connection_class">连接</string>
-    <string name="speedResult">下载</string>
+    <string name="testDownloadResult">下载</string>
+    <string name="unknown">未知</string>
+    <string name="unknown_manufacture">未知设备商</string>
+    <string name="connect_wifi_please">无Wifi连接</string>
+    <string name="NEIGHBOR_REACHABLE">REACHABLE</string>
+    <string name="NEIGHBOR_INCOMPLETE">INCOMPLETE</string>
+    <string name="local_ip">本地IP</string>
+    <string name="connecting_gateway">Connecting GateWay:</string>
+    <string name="fixer">FIXER</string>
+    <string name="resolving_dns">解析DNS(www.google.com):</string>
+    <string name="connecting_dns">连接至DNS:</string>
+    <string name="connecting_wifi">连接至Wifi:</string>
+    <string name="connecting_data">连接至数据:</string>
+    <string name="testUploadResult">上传</string>
+    <string name="search_control">停止</string>
 </resources>

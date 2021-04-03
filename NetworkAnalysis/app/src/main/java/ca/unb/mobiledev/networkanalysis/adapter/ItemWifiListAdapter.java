@@ -60,7 +60,6 @@ public class ItemWifiListAdapter extends BaseAdapter implements AdapterView.OnIt
         notifyDataSetChanged();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = inflater.inflate(R.layout.item_wifi_list, null);

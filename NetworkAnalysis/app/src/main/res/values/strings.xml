@@ -11,14 +11,15 @@
     <string name="setting_language">Languages</string>
     <string name="setting_theme">Themes</string>
     <string name="setting_notifications">Notifications</string>
-
+    <string name="setting_theme_one">Green-Purple</string>
+    <string name="setting_theme_two">Blue-Yellow</string>
 
 
     <string name="test_connection">test</string>
     <string name="connection_class">connection</string>
     <string name="testDownloadResult">Download</string>
     <string name="unknown">unknown</string>
-    <string name="unknown_manufacture">unknow_manufacture</string>
+    <string name="unknown_manufacture">unknown_manufacture</string>
     <string name="connect_wifi_please">No wifi Connect</string>
     <string name="NEIGHBOR_REACHABLE">REACHABLE</string>
     <string name="NEIGHBOR_INCOMPLETE">INCOMPLETE</string>

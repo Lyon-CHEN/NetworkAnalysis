@@ -141,7 +141,7 @@ public class FixerViewModel extends AndroidViewModel {
     public void startCheck() {
         checkConnectGateway();
         checkConnectDNS();
-        checkResolvingName();
+        //checkResolvingName();
         checkConnectWifi();
         checkConnectDataName();
     }

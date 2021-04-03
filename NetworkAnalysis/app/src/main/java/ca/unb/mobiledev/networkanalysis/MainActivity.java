@@ -1,13 +1,15 @@
 package ca.unb.mobiledev.networkanalysis;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.media.Image;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private ImageButton button_wifi, button_search, button_test, button_fixer, button_setting;
     enum Scope
     {
@@ -18,14 +20,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
         setContentView(R.layout.activity_main);
+
         //Initialize fragmentManager and add Transaction
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.layout_center, new WifiFragment()).commit();
+
+        //Action bar hide
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        //apply settings saved before
+        SharedPreferenceHelper sharedPreferenceHelper = new SharedPreferenceHelper(getApplicationContext());
+
+        switch (sharedPreferenceHelper.read("theme")){
+            case "theme1":
+                setTheme(R.style.Theme1);
+                break;
+            case "theme2":
+                setTheme(R.style.Theme2);
+                break;
+        }
 
         //Initialize buttons and assign listeners
         button_wifi = findViewById(R.id.button_wifi);

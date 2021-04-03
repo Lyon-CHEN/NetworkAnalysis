@@ -11,4 +11,10 @@
     <color name="wifi_acclerate_green">#15B96B</color>
     <color name="wifi_acclerate_orange">#F29336</color>
     <color name="wifi_acclerate_red">#EC6066</color>
+
+    //themes
+    <color name="theme_green">#2EBF91</color>
+    <color name="theme_purple">#8360C3</color>
+    <color name="theme_yellow">#DCCC3F</color>
+    <color name="theme_blue">#558AD9</color>
 </resources>
