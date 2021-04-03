@@ -35,6 +35,10 @@ ext {
 }
 
 dependencies {
+    // Room Components
+    implementation "androidx.room:room-runtime:$roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleExtensionsVersion"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"

@@ -1,18 +1,13 @@
 package ca.unb.mobiledev.networkanalysis.network.devicescan;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-
-import androidx.annotation.NonNull;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
@@ -22,17 +17,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import ca.unb.mobiledev.networkanalysis.R;
+import ca.unb.mobiledev.networkanalysis.db.ManufRepository;
+import ca.unb.mobiledev.networkanalysis.db.Manufacture;
 import ca.unb.mobiledev.networkanalysis.network.Constant;
 import ca.unb.mobiledev.networkanalysis.network.Device;
 import ca.unb.mobiledev.networkanalysis.network.NetworkUtil;
@@ -46,48 +38,57 @@ public class DeviceScanManager implements Runnable
     private static Iterator mIpScanIterator = mIpInLan.iterator();
     private DeviceScanResult mScanResult;
     private Integer mProgress;
-    private ExecutorService mExecutor;
+    private ThreadPoolExecutor  mExecutor;
     private Context mContext;
-
-    public static final int  MESSAGE_SCAN_ONE = 200001;
+    volatile int mRun = 0;  //0==stop,1==run,2==final
+    private static int count=0;
+    private final ManufRepository manufRepository;
 
     public DeviceScanManager(Context context, DeviceScanResult scanResult) {
         mScanResult = scanResult;
         mContext = context;
         mProgress = 0;
-    }
+        manufRepository = new ManufRepository(mContext);
+        if(Looper.myLooper() ==null) {
+            Looper.prepare();
+            Looper.myLooper();
+        }
 
-
-    @Override
-    public void run() {
-        Looper.prepare();
-        Looper.myLooper();
-        startScan();
-    }
-
-    public void startScan()
-    {
-        List<Device> deviceList;
         String localIp = NetworkUtil.getLocalIp();
         String routerIp = NetworkUtil.getGateWayIp(mContext);
         if (TextUtils.isEmpty(localIp) || TextUtils.isEmpty(routerIp))
             return;
         mIpInLan.addAll(NetworkUtil.getSubnet(localIp,true));
-
         //init a thread pool
-        mExecutor= Executors.newFixedThreadPool(Constant.SCAN_COUNT);
+        mExecutor=  new ThreadPoolExecutor(Constant.SCAN_COUNT, Constant.SCAN_COUNT, 0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
+    }
 
-        for (String mIP : mIpInLan) {
-            ScanTasks mScanTask = new ScanTasks(mIP,mDeviceScanManagerHandler);
-            mExecutor.submit(mScanTask);
-        }
-        //waiting for all task completed
-        mExecutor.shutdown();
+
+
+    @Override
+    public void run() {
 
         while (!mExecutor.isTerminated()) {
             try {
+                if(mRun ==1){
+                    String mIP = (String) mIpInLan.get(count);
+
+                    if(!mExecutor.isShutdown()) {
+                        ScanTasks mScanTask = new ScanTasks(mIP,mDeviceScanManagerHandler);
+                        mExecutor.submit(mScanTask);
+                        count++;
+                    }
+
+                } else if(mRun ==2){
+                    count=0;
+                    mIpInLan.clear();
+                    String localIp = NetworkUtil.getLocalIp();
+                    mIpInLan.addAll(NetworkUtil.getSubnet(localIp,true));
+                    mRun =0;
+                }
                 Thread.sleep(1000);
-                mProgress++;
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -95,17 +96,25 @@ public class DeviceScanManager implements Runnable
         mProgress = Constant.PROGRESS_MAX;
     }
 
+    public void startScan(){
+        mDeviceScanManagerHandler.sendMessage(
+                mDeviceScanManagerHandler.obtainMessage(
+                        Constant.MSG.START) );
+    }
+
+
     public void stopScan()
     {
-        if (mExecutor != null)
-        {
-            mExecutor.shutdownNow();
-        }
+        mDeviceScanManagerHandler.sendMessage(
+                mDeviceScanManagerHandler.obtainMessage(
+                        Constant.MSG.STOP) );
     }
 
     private String parseHostInfo(String mac) {
-        return Manufacture.getInstance()
-                .getManufacture(mac, mContext);
+        if (TextUtils.isEmpty(mac) || (mac.length() < 8))
+            return null;
+        String key = mac.substring(0, 2) + mac.substring(3, 5) + mac.substring(6, 8);
+        return manufRepository.searchManufacture(key.toUpperCase());
     }
 
     class ScanTasks implements Callable {
@@ -159,6 +168,9 @@ public class DeviceScanManager implements Runnable
                                 mDeviceScanManagerHandler.obtainMessage(
                                         Constant.MSG.SCAN_ONE, mDevice));
                     }
+                    mDeviceScanManagerHandler.sendMessage(
+                            mDeviceScanManagerHandler.obtainMessage(
+                                    Constant.MSG.SCAN_OVER) );
                 }
 
             } catch (FileNotFoundException e) {
@@ -204,6 +216,14 @@ public class DeviceScanManager implements Runnable
                     }
                     break;
                 case Constant.MSG.SCAN_OVER :
+                    manager.mProgress++;
+                    break;
+                case Constant.MSG.START :
+                    manager.mRun = 1;
+                    mProgress=0;
+                    break;
+                case Constant.MSG.STOP :
+                    manager.mRun =2;
                     break;
             }
         }

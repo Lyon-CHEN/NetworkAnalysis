@@ -1,10 +1,10 @@
 <resources>
     //network
-    <string name="app_name">NetworkAnalysis</string>
+    <string name="app_name">Network Analysis</string>
     <string name="current_connected_wifi">Current connected Wifi</string>
     <string name="wifi_scan_results">Wifi scan results</string>
     <string name="hiddenWifi">HIDDEN</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Network Analysis</string>
 
     //setting
     <string name="setting_auto_update">Auto Update</string>

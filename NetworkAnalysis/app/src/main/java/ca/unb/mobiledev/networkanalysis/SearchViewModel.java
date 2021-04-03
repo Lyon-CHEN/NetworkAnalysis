@@ -46,7 +46,8 @@ public class SearchViewModel extends AndroidViewModel {
     }
 
     public void startScan(){
-        threadPool.execute(mManager);
+        mDeviceList.clear();
+        mManager.startScan();
     }
 
     LiveData<Integer> getProgress () {

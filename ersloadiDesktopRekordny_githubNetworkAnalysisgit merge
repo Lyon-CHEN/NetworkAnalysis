@@ -1,0 +1,285 @@
+[33mcommit 06995ba9aaa2d4759a9d4b8255f1858d2fbe7602[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Fri Apr 2 23:09:00 2021 -0300
+
+    setting theme
+
+[33mcommit 3952f2eb9d29a0b8793a22cd9c8d468a8ac4d55f[m
+Merge: 711e5a5 6ea40b0
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Thu Apr 1 08:45:40 2021 -0300
+
+    Merge pull request #11 from Lyon-CHEN/SpeedTest-MVVM
+    
+    add upload speed test
+
+[33mcommit 6ea40b08109df005f0cfb3d8568dee4f4c7394db[m[33m ([m[1;31morigin/SpeedTest-MVVM[m[33m)[m
+Author: lyon <sosokey@gmail.com>
+Date:   Thu Apr 1 08:44:55 2021 -0300
+
+    add upload speed test
+
+[33mcommit 711e5a5a97aa61d94c5ead5898f90f46c16261d2[m
+Merge: d86ecde 3289244
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Wed Mar 31 18:07:44 2021 -0300
+
+    Merge branch 'main' of github.com:Lyon-CHEN/NetworkAnalysis into main
+
+[33mcommit d86ecdea01a49d50dfe8ffec42c48694b4c3aa87[m
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Wed Mar 31 18:06:52 2021 -0300
+
+    radarView
+
+[33mcommit 3289244bb6a888b917813e98728cee629a606773[m
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sun Mar 28 23:16:04 2021 -0300
+
+    Delete report-lab7/.idea directory
+
+[33mcommit f056c8d421ad5e3baf84c934caa275d185c03403[m
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sun Mar 28 23:15:56 2021 -0300
+
+    Delete report-lab6 directory
+
+[33mcommit 5c6588baf2332ff069df639e4619120f903f4d93[m
+Merge: 7310935 3c3584c
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sun Mar 28 23:14:14 2021 -0300
+
+    Merge pull request #10 from Lyon-CHEN/fixer
+    
+    add FixerFragment
+
+[33mcommit 3c3584c355e903bcb88a5dd0836fabccf4ad4a74[m
+Merge: 3a9d6cc 7310935
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sun Mar 28 23:14:08 2021 -0300
+
+    Merge branch 'main' into fixer
+
+[33mcommit 3a9d6cc706a4622f9f3a0e1f85c845b513055fa0[m
+Author: lyon <sosokey@gmail.com>
+Date:   Sun Mar 28 23:11:24 2021 -0300
+
+    add FixerFragment
+
+[33mcommit 731093515dbf5e81ae9a694100097d6eeda1f26d[m
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Sat Mar 27 11:53:08 2021 -0300
+
+    setting languages
+    
+    setting_languages
+
+[33mcommit bb39d8bb23d381e844b606dfc1302ede1d8891fc[m
+Merge: 39a375b c964a7d
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sat Mar 27 11:33:21 2021 -0300
+
+    Merge pull request #9 from Lyon-CHEN/wifiscan
+    
+    fragment update to new version.
+
+[33mcommit c964a7d216ca805e3ca612fdcdc1b6758f7d740d[m
+Author: lyon <sosokey@gmail.com>
+Date:   Sat Mar 27 11:30:15 2021 -0300
+
+    fragment update to new version.
+    add scan device module.
+
+[33mcommit 39a375bba7048d16d02134537073e50b7278c763[m
+Merge: 21e745c 32b5a85
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sun Feb 21 17:48:29 2021 -0400
+
+    Merge pull request #8 from Lyon-CHEN/speedtest
+    
+    Speedtest
+
+[33mcommit 32b5a85a0b5786b29445a9e254d9608537814b79[m[33m ([m[1;31morigin/speedtest[m[33m)[m
+Merge: 31851b4 21e745c
+Author: lyon <sosokey@gmail.com>
+Date:   Sun Feb 21 17:45:00 2021 -0400
+
+    Merge branch 'main' of https://github.com/Lyon-CHEN/NetworkAnalysis
+
+[33mcommit 21e745cc24d4f8e7f145a35cec02d62e3957ae72[m
+Merge: c746b4c 8cdd884
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sun Feb 21 17:36:38 2021 -0400
+
+    Merge pull request #7 from Lyon-CHEN/main_activity
+    
+    UI improvements
+
+[33mcommit 8cdd884139ee886a503e389c6fcfb77e7fd76fbe[m[33m ([m[1;31morigin/main_activity[m[33m)[m
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Sun Feb 21 17:17:52 2021 -0400
+
+    UI improvements
+
+[33mcommit 31851b4826a0d464601b4ce12f72e74f3500230b[m
+Author: lyon <sosokey@gmail.com>
+Date:   Sat Feb 20 23:35:18 2021 -0400
+
+    speed test
+
+[33mcommit c746b4c2c3bd88db9ea43412399302fd2a9bcf6d[m
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Mon Feb 15 22:44:05 2021 -0400
+
+    Delete WifiActivity.java
+
+[33mcommit 320ede9826dc88a97392cd2f922dc4fb623f1348[m
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Mon Feb 15 22:42:47 2021 -0400
+
+    Delete activity_wifi.xml
+
+[33mcommit 8fda246748f5936393ea279ca2074a74e03ccbd3[m
+Merge: 8740b49 f1edf9f
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Mon Feb 15 22:41:36 2021 -0400
+
+    Merge pull request #6 from Lyon-CHEN/wifiscan
+    
+    change to fragment & add table title of wifi list
+
+[33mcommit f1edf9f2aa2c8a8ed37deb2a461d9abec3595ef2[m[33m ([m[1;31morigin/wifiscan[m[33m)[m
+Author: lyon <sosokey@gmail.com>
+Date:   Mon Feb 15 22:37:09 2021 -0400
+
+    change to fragment & title of wifi list view
+
+[33mcommit 8740b49fcc958949adbefb1a1d2355d793869311[m
+Merge: b713efc 6b22165
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Mon Feb 15 21:14:07 2021 -0400
+
+    Merge pull request #5 from Lyon-CHEN/main_activity
+    
+    Main activity
+
+[33mcommit 6b2216523828622c9e00ad5e11b297245f1e8431[m[33m ([m[1;32mmerge[m[33m, [m[1;32mmaster[m[33m, [m[1;32mcommit[m[33m)[m
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Mon Feb 15 19:08:01 2021 -0400
+
+    Add Fragment files.
+
+[33mcommit 13f611d8f736719b29de2d87b89e6ec550c588ac[m
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Mon Feb 15 15:28:04 2021 -0400
+
+    Main Activity
+
+[33mcommit b713efcd9fee8286d5d8663bdc12d07474365ad0[m
+Merge: 6c1d0ed 924aab7
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sat Feb 13 13:01:54 2021 -0400
+
+    Merge pull request #4 from Lyon-CHEN/wifiscan
+    
+    Wifiscan
+
+[33mcommit 924aab77d3532ea682fa542251420ed15a40eb87[m
+Author: lyon <sosokey@gmail.com>
+Date:   Sat Feb 13 12:58:09 2021 -0400
+
+    build file
+
+[33mcommit 9f34cdcf4db800fb75f568239f5b143a7d8f99cc[m
+Author: lyon <sosokey@gmail.com>
+Date:   Sat Feb 13 12:53:53 2021 -0400
+
+    list view expand page for detail including BSSID and Bandwidth
+
+[33mcommit 6c1d0ed1785170df54aeb9f9f2f49a7270fcd500[m
+Merge: 00e96fc bb80c31
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Sat Feb 13 12:48:17 2021 -0400
+
+    Merge pull request #3 from Lyon-CHEN/wifiscan
+    
+    Wifiscan
+
+[33mcommit bb80c31e3439b92b298d07a6d1a7ef48b31c0376[m
+Author: lyon <sosokey@gmail.com>
+Date:   Sat Feb 13 12:46:22 2021 -0400
+
+    list view expand page for detail including BSSID and Bandwidth
+
+[33mcommit 594ae1359936d78e5f91e3646a95518cfed9d16b[m
+Author: lyon <sosokey@gmail.com>
+Date:   Sat Feb 13 11:55:40 2021 -0400
+
+    list view expand page for detail including BSSID and Bandwidth
+
+[33mcommit 00e96fc56224bcbfe9c86fb5f4b827c37748304b[m
+Merge: 6af9a16 cd5e742
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Fri Feb 12 19:17:46 2021 -0400
+
+    Merge pull request #2 from Lyon-CHEN/wifiscan
+    
+    Wifiscan
+
+[33mcommit cd5e7427734af9b08f1c910445080e41767eef8c[m
+Author: lyon <sosokey@gmail.com>
+Date:   Fri Feb 12 19:04:48 2021 -0400
+
+    list view dynamic update
+
+[33mcommit 2ead757b98efc2fc36f7f766892462c25b27bbd6[m
+Author: lyon <sosokey@gmail.com>
+Date:   Fri Feb 12 19:03:06 2021 -0400
+
+    list view dynamic update
+
+[33mcommit 6af9a16f0ca1ac644a41e9fb562073e6f40a3878[m
+Merge: cb5093c a7e64bc
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Fri Feb 12 15:41:08 2021 -0400
+
+    Merge pull request #1 from Lyon-CHEN/wifiscan
+    
+    wifi scan
+
+[33mcommit a7e64bc8d5b1974f155234f42d250725d62e763e[m
+Author: lyon <sosokey@gmail.com>
+Date:   Fri Feb 12 15:35:21 2021 -0400
+
+    wifi scan
+
+[33mcommit cb5093c3593697debaee10b9e464c979f64b9f81[m
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Fri Feb 12 13:29:01 2021 -0400
+
+    update 36x36 icons
+
+[33mcommit 07b051ab47d83003a4d19d77ea60a3d40d1438fa[m
+Author: Rekordny <loadingwheel@gmail.com>
+Date:   Fri Feb 12 13:24:23 2021 -0400
+
+    wifi_strength icons
+
+[33mcommit 9444505005dc71275461e542a7727cd6fd6e98d2[m
+Merge: 8c7d717 02022de
+Author: lyon <sosokey@gmail.com>
+Date:   Thu Feb 11 20:11:00 2021 -0400
+
+    Merge branch 'main' of https://github.com/Lyon-CHEN/NetworkAnalysis into main
+
+[33mcommit 8c7d7170abf61e33e311f3a4c58b074fbfbfb137[m
+Author: lyon <sosokey@gmail.com>
+Date:   Thu Feb 11 19:01:40 2021 -0400
+
+    init
+
+[33mcommit 02022de5e20ce3836c79856d7dc481fd1c77ab90[m
+Author: Lyon-CHEN <51531869+Lyon-CHEN@users.noreply.github.com>
+Date:   Thu Feb 11 18:58:16 2021 -0400
+
+    Initial commit

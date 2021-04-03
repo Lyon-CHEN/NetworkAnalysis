@@ -1,6 +1,8 @@
 package ca.unb.mobiledev.networkanalysis;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,39 +30,10 @@ import ca.unb.mobiledev.networkanalysis.network.NetworkUtil;
 public class WifiFragment extends Fragment {
     private final static String TAG = "WifiFragment";
     private View vWifiFragment;
-    WifiManager mWifiManager;
-    List<ScanResult> listWifiScan;
+    private WifiViewModel mWifiViewModel;
     private Context mContext;
 
-    private final int SAMPLE_RATE = 20000;
-
     private ItemWifiListAdapter listAdapter;
-
-    private BroadcastReceiver wifiScanResultReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Log.i(TAG, "wifi Scan");
-            Boolean wifiScanResult = intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-            Boolean networkIDSChanged = intent.getAction().equals(WifiManager.NETWORK_IDS_CHANGED_ACTION);
-            Boolean networkStateChanged = intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-            Boolean RSSIChanged = intent.getAction().equals(WifiManager.RSSI_CHANGED_ACTION);
-
-            if(networkStateChanged || networkIDSChanged) {
-                updateCurrentWifiStatus();
-            }
-
-            if(wifiScanResult) {
-                listWifiScan = mWifiManager.getScanResults();
-                listAdapter = new ItemWifiListAdapter(context, listWifiScan);
-                ListView listView = vWifiFragment.findViewById(R.id.wifiListView);
-
-                listView.setAdapter(listAdapter);
-                listView.setOnItemClickListener(listAdapter);
-
-                listAdapter.notifyDataSetChanged();
-            }
-        }
-    };
 
     protected  void updateCurrentWifiStatus () {
         WifiInfo wifiInfo = NetworkUtil.getWifiInfo(mContext);
@@ -78,31 +51,44 @@ public class WifiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vWifiFragment = inflater.inflate(R.layout.fragment_wifi, container, false);
         mContext = container.getContext();
+        mWifiViewModel = new ViewModelProvider(requireActivity()).get(WifiViewModel.class);
+        mWifiViewModel.getWifiScanResult().observe(getViewLifecycleOwner(),ScanResult->{
+            updateCurrentWifiStatus();
+
+            listAdapter = new ItemWifiListAdapter(mContext, ScanResult);
+            ListView listView = vWifiFragment.findViewById(R.id.wifiListView);
+
+            listView.setAdapter(listAdapter);
+            listView.setOnItemClickListener(listAdapter);
+
+            listAdapter.notifyDataSetChanged();
+        });
+
+        mWifiViewModel.getRefresh().observe(getViewLifecycleOwner(), isRefresh ->{
+            updateCurrentWifiStatus();
+        });
+
+        updateCurrentWifiStatus();
+        return vWifiFragment;
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         if (!NetworkUtil.isWifiConnected(mContext)) {
             Toast.makeText(mContext,
                     R.string.connect_wifi_please,Toast.LENGTH_SHORT).show();
         }else {
-            mWifiManager = NetworkUtil.getWifiManager(mContext);
-            listWifiScan = mWifiManager.getScanResults();
-
-            updateCurrentWifiStatus();
-
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-            intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-            intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-            intentFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
-            mContext.registerReceiver(wifiScanResultReceiver, intentFilter);
-
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Log.i(TAG, "start scan()");
-                    mWifiManager.startScan();
-                }
-            }, 0, SAMPLE_RATE);
+            mWifiViewModel.startTimer();
         }
-        return vWifiFragment;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mWifiViewModel.stopTimer();
     }
 }

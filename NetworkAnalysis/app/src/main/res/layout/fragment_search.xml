@@ -22,11 +22,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text=""/>
-        <Button android:layout_height="wrap_content"
+        <ToggleButton
+            android:id="@+id/search_ToggleButton"
             android:layout_width="wrap_content"
-            android:id="@+id/searchBtn"
-            android:text="@string/search_control"
-            android:layout_marginBottom="10dp"/>
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textOff="Pause"
+            android:textOn="Resume"
+            android:layout_centerHorizontal="true"
+            android:textColor="#f00"
+            android:textSize="25sp"/>
         <ProgressBar
             android:id="@+id/searchProgressBar"
             android:minHeight="20dip"
