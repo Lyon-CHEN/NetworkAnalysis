@@ -4,6 +4,15 @@ public class Device {
     public String Ip;
     public String macAddress;
     public String vendor;
+    public String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getIp() {
         return Ip;
@@ -29,18 +38,18 @@ public class Device {
         this.vendor = vendor;
     }
 
-    public Device(String Ip)
+    public Device(String Ip, String macAddress)
     {
         this.Ip = Ip;
-        this.macAddress = "";
-        this.vendor = "";
+        this.macAddress = macAddress;
     }
 
-    public Device(String Ip, String macAddress, String vendor)
+    public Device(String Ip, String macAddress, String vendor, String address)
     {
         this.Ip = Ip;
         this.macAddress = macAddress;
         this.vendor = vendor;
+        this.address = address;
     }
 
     @Override

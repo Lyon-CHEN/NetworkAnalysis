@@ -23,6 +23,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import ca.unb.mobiledev.networkanalysis.R;
+import ca.unb.mobiledev.networkanalysis.db.Item;
 import ca.unb.mobiledev.networkanalysis.db.ManufRepository;
 import ca.unb.mobiledev.networkanalysis.db.Manufacture;
 import ca.unb.mobiledev.networkanalysis.network.Constant;
@@ -110,11 +111,20 @@ public class DeviceScanManager implements Runnable
                         Constant.MSG.STOP) );
     }
 
-    private String parseHostInfo(String mac) {
+    private boolean parseHostInfo(Device device) {
+        String mac = device.getMacAddress();
         if (TextUtils.isEmpty(mac) || (mac.length() < 8))
-            return null;
-        String key = mac.substring(0, 2) + mac.substring(3, 5) + mac.substring(6, 8);
-        return manufRepository.searchManufacture(key.toUpperCase());
+            return false;
+        String searchKey = mac.substring(0, 2) + mac.substring(3, 5) + mac.substring(6, 8);
+        Item item = manufRepository.searchManufacture(searchKey.toUpperCase());
+
+        String vendor = item.getOrganizationName().length()>0 ? item.getOrganizationName() : "UnKnown" ;
+        String vendor_address = item.getOrganizationAddress().length()>0 ? item.getOrganizationAddress() : " " ;
+
+        device.setVendor(vendor);
+        device.setAddress(vendor_address);
+
+        return true;
     }
 
     class ScanTasks implements Callable {
@@ -157,13 +167,9 @@ public class DeviceScanManager implements Runnable
                     String state = neighborLine[neighborLine.length - 1];
 
                     if (!state.equals(R.string.NEIGHBOR_REACHABLE) && !state.equals(R.string.NEIGHBOR_INCOMPLETE)) {
-                        String vendor = parseHostInfo(macAddress);
-                        if(TextUtils.isEmpty(vendor)){
-                            vendor ="UNKNOWN";
-                        }else{
-                            vendor = vendor.substring(0,10);
-                        }
-                        mDevice = new Device(ip, macAddress, vendor);
+                        mDevice = new Device(ip,macAddress);
+                        parseHostInfo(mDevice);
+
                         mDeviceScanManagerHandler.sendMessage(
                                 mDeviceScanManagerHandler.obtainMessage(
                                         Constant.MSG.SCAN_ONE, mDevice));
@@ -210,9 +216,9 @@ public class DeviceScanManager implements Runnable
                 case Constant.MSG.SCAN_ONE :
                     if (manager.mScanResult != null)
                     {
-                        Device ip_mac = (Device) msg.obj;
-                        if (ip_mac != null)
-                            manager.mScanResult.deviceScanResult(ip_mac,mProgress);
+                        Device device = (Device) msg.obj;
+                        if (device != null)
+                            manager.mScanResult.deviceScanResult(device,mProgress);
                     }
                     break;
                 case Constant.MSG.SCAN_OVER :
