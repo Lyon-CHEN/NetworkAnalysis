@@ -21,30 +21,29 @@
 ## Compatibility
 - Platform:
 	Compile with: Android Studio 4.1.1 & Java 1.8
-	Java 1.8
-	
+		
 - Supported API levels:
-	Android 10, API Level 29
+	**Android 10, API Level 29**
 - Test on:  
 	RedMI Note8 Pro. 
 ***
 ## Key Technology
 - WiFi scanning: 
+	- Register for the android broadcast, and listen to the Wifi scan result refresh every 20 seconds.
+	- Architecture
 - Device scanning: 
 - Speed test:
 - Network diagnosis:
 ***
-## Architecture
-***
 ## Todo list
-- [ ]
+- [ ] TODO
 
 ***
 ## Changlog
+## Bug/Issue
 
-
-
+***
 ## External libraries
-JSpeedTest: https://github.com/bertrandmartel/speed-test-lib</br>
-WiFiDetective: https://github.com/gpfduoduo/WiFiDetective
+[JSpeedTest:] (https://github.com/bertrandmartel/speed-test-lib)</br>
+[WiFiDetective:] (https://github.com/gpfduoduo/WiFiDetective)
 
