@@ -15,7 +15,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/local_ip"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:background="@drawable/textview_whiteborder"
+            android:layout_marginHorizontal="5dp"/>
         <TextView
             android:id="@+id/connected_wifi_info"
             android:layout_width="match_parent"
@@ -31,18 +33,22 @@
             android:textOn="Resume"
             android:layout_centerHorizontal="true"
             android:textColor="#f00"
-            android:textSize="25sp"/>
+            android:textSize="20dp"
+            android:background="@drawable/round_button_shape"
+            android:layout_gravity="center_horizontal"/>
         <ProgressBar
             android:id="@+id/searchProgressBar"
             android:minHeight="20dip"
             android:maxHeight="20dip"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            style="@android:style/Widget.ProgressBar.Horizontal" />
+            style="@style/horizontal_progress_bar"
+            android:layout_marginVertical="5dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@drawable/any_whiteborder"
             >
 
             <ca.unb.mobiledev.networkanalysis.radarview.RadarView

@@ -9,53 +9,74 @@
         android:layout_width="wrap_content"
         android:id="@+id/testBtn"
         android:text="@string/test_connection"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:text="@string/testDownloadResult"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:id="@+id/testDownloadResult"
-        android:textSize="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <ProgressBar
-        android:id="@+id/testDownloadProgressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-         />
-
-    <TextView
-        android:text="@string/testUploadResult"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"/>
+        android:background="@drawable/round_button_shape"
+        style="@style/round_button"/>
 
-    <TextView
-        android:id="@+id/testUploadResult"
-        android:textSize="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:background="@drawable/any_whiteborder">
+        <TextView
+            android:text="@string/testDownloadResult"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textview_whiteborder"/>
 
-    <ProgressBar
-        android:id="@+id/testUploadProgressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-         />
+        <TextView
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/testDownloadResult"
+            android:textSize="32dp"
+            android:layout_height="190dp"
+            android:layout_width="wrap_content"/>
 
+        <ProgressBar
+            android:layout_marginHorizontal="1dp"
+            android:layout_marginBottom="1dp"
+            android:id="@+id/testDownloadProgressBar"
+            style="@style/horizontal_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:gravity="bottom"
+             />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:background="@drawable/any_whiteborder">
+        <TextView
+            android:text="@string/testUploadResult"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textview_whiteborder"/>
+
+        <TextView
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/testUploadResult"
+            android:textSize="32dp"
+            android:layout_height="190dp"
+            android:layout_width="wrap_content"/>
+
+        <ProgressBar
+            android:layout_marginHorizontal="1dp"
+            android:layout_marginBottom="1dp"
+            android:id="@+id/testUploadProgressBar"
+            style="@style/horizontal_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:gravity="bottom"
+            />
+    </LinearLayout>
 <!--
     <RelativeLayout
         android:layout_width="match_parent"

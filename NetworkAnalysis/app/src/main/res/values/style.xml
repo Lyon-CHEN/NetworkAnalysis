@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="round_button">
+        <item name="android:textSize">18sp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+    </style>
+    <style name="horizontal_progress_bar" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <!--进度条的进度颜色drawable文件-->
+        <item name="android:progressDrawable">@drawable/horizontal_progress_bar</item>
+        <!--进度条的最小高度-->
+        <item name="android:minHeight">17dp</item>
+        <!--进度条的最大高度-->
+        <item name="android:maxHeight">17dp</item>
+    </style>
+</resources>

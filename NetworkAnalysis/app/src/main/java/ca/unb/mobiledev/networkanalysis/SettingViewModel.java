@@ -2,13 +2,19 @@ package ca.unb.mobiledev.networkanalysis;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+
+import java.util.Locale;
 
 public class SettingViewModel extends AndroidViewModel {
     private MutableLiveData<Integer> theme_num;
@@ -69,6 +75,26 @@ public class SettingViewModel extends AndroidViewModel {
     }
 
     public void changeLanguages(int i){
+        Resources resources = main.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        switch (i){
+            case 1:
+                config.locale = Locale.ENGLISH;
+                resources.updateConfiguration(config, dm);
+
+                break;
+            case 2:
+                config.locale = Locale.TRADITIONAL_CHINESE;
+                resources.updateConfiguration(config, dm);
+                break;
+        }
+        Intent intent = new Intent(main, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        main.startActivity(intent);
+        // 杀掉进程
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
 
     }
 

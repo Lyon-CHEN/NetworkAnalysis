@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FixerFragment">
+    tools:context=".FixerFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/fixer" />
-    <ProgressBar
-        android:id="@+id/checkProgressBar"
-        android:minHeight="20dip"
-        android:maxHeight="20dip"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        style="@android:style/Widget.ProgressBar.Horizontal" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,14 +15,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/any_whiteborder">
 
             <TextView
                 android:text="@string/connecting_wifi"
                 android:textSize="20sp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@drawable/textview_whiteborder"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                >
             </TextView>
 
             <TextView
@@ -46,12 +42,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/any_whiteborder">
 
             <TextView
                 android:text="@string/connecting_data"
                 android:textSize="20sp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@drawable/textview_whiteborder"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp">
             </TextView>
@@ -67,12 +68,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/any_whiteborder">
 
             <TextView
                 android:text="@string/connecting_gateway"
                 android:textSize="20sp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@drawable/textview_whiteborder"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp">
             </TextView>
@@ -88,12 +94,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/any_whiteborder">
 
             <TextView
                 android:text="@string/connecting_dns"
                 android:textSize="20sp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@drawable/textview_whiteborder"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp">
             </TextView>
@@ -109,12 +120,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/any_whiteborder">
 
             <TextView
                 android:text="@string/resolving_dns"
                 android:textSize="20sp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@drawable/textview_whiteborder"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp">
             </TextView>
@@ -128,6 +144,15 @@
 
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/checkProgressBar"
+            style="@style/horizontal_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:maxHeight="20dip"
+            android:minHeight="20dip" />
     </LinearLayout>
 
-</FrameLayout>
+
+</LinearLayout>
