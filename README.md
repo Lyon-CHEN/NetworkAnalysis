@@ -37,7 +37,9 @@
 - Network diagnosis:
 ***
 ## Todo list
-- [ ] TODO
+- [ ] Add WiFi security detection function, such as encryption method, weak password detection, etc.
+- [ ] Add port scanning, and identify the port service protol, like Http/Https, SSH, Bonjour, Samba...
+- [ ] Improving UI
 
 ***
 ## Changlog
