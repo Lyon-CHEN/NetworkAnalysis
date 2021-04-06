@@ -42,6 +42,8 @@
 ***
 ## Changlog
 ## Bug/Issue
+The DNS resolution check function is compatible with some computers, the no class def found error of Landroid / net / Dns Resolver will occur.
+Temporary solution: annotation checkResolvingName() function in FixerViewModel.java
 
 ***
 ## External libraries
