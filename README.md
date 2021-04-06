@@ -24,8 +24,16 @@
 		
 - Supported API levels:
 	**Android 10, API Level 29**
-- Test on:  
-	RedMI Note8 Pro. 
+- Permission requirement:
+	- ACCESS_NETWORK_STATE
+	- ACCESS_WIFI_STATE
+	- CHANGE_WIFI_STATE
+	- ACCESS_FINE_LOCATION		#be requried for wifi ssid scan, 第一次运行时会检查授权
+	- ACCESS_COARSE_LOCATION	#be requried for wifi ssid scan
+	- INTERNET			#be required for speed test
+## Test Cases:
+- Test on:  RedMI Note8 Pro. 
+
 ***
 ## Key Technology
 - WiFi scanning: 
@@ -42,11 +50,10 @@
 - [ ] Improving UI
 
 ***
-## Changlog
 ## Bug/Issue
 The DNS resolution check function is compatible with some computers, the no class def found error of Landroid / net / Dns Resolver will occur.
 Temporary solution: annotation checkResolvingName() function in FixerViewModel.java
-
+## Changlog
 ***
 ## External libraries
 [JSpeedTest:] (https://github.com/bertrandmartel/speed-test-lib)</br>
