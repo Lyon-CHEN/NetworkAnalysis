@@ -47,7 +47,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:textAlignment="center"
             android:gravity="center_vertical"
             android:text="@string/wifi_scan_results"
             android:textSize="20sp"
@@ -65,10 +64,10 @@
                 android:textAlignment="center"
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "1.5"
+                android:layout_weight = "1"
                 android:gravity = "center"
                 android:padding = "5dp"
-                android:text = "SSID"
+                android:text = "@string/head_SSID"
                 android:textColor = "@color/white"
                 android:background="@drawable/textview_whiteborder"/>
 
@@ -76,10 +75,10 @@
                 android:textAlignment="center"
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "0.7"
+                android:layout_weight = "0.5"
                 android:gravity = "center"
                 android:padding = "5dp"
-                android:text = "Frequency"
+                android:text = "@string/head_frequency"
                 android:textColor = "@color/white"
                 android:background="@drawable/textview_whiteborder"/>
 
@@ -87,10 +86,10 @@
                 android:textAlignment="center"
                 android:layout_width = "0dp"
                 android:layout_height = "wrap_content"
-                android:layout_weight = "0.8"
+                android:layout_weight = "0.5"
                 android:gravity = "center"
                 android:padding = "5dp"
-                android:text = "Strength (-dBm)"
+                android:text = "@string/head_strength"
                 android:textColor = "@color/white"
                 android:background="@drawable/textview_whiteborder"/>
         </LinearLayout>

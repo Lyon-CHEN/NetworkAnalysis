@@ -6,7 +6,7 @@
     <string name="current_connected_wifi">目前连接WIFI</string>
     <string name="wifi_scan_results">WIFI扫描结果</string>
     <string name="hiddenWifi">已隐藏</string>
-    <string name="title_activity_main">主活动</string>
+    <string name="title_activity_main">网络分析</string>
 
     //setting
     <string name="setting_auto_update">自动更新</string>
