@@ -1,0 +1,289 @@
+Index: app/src/main/res/layout/fragment_search.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".SearchFragment\">\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\"\r\n        >\r\n        <TextView\r\n            android:id=\"@+id/localIp\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"5dp\"\r\n            android:text=\"@string/local_ip\"\r\n            android:textSize=\"20sp\"/>\r\n        <TextView\r\n            android:id=\"@+id/connected_wifi_info\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:text=\"\"/>\r\n        <Button android:layout_height=\"wrap_content\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:id=\"@+id/searchBtn\"\r\n            android:text=\"@string/search_control\"\r\n            android:layout_marginBottom=\"10dp\"/>\r\n        <ProgressBar\r\n            android:id=\"@+id/searchProgressBar\"\r\n            android:minHeight=\"20dip\"\r\n            android:maxHeight=\"20dip\"\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            style=\"@android:style/Widget.ProgressBar.Horizontal\" />\r\n        <RelativeLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"vertical\"\r\n            >\r\n\r\n            <ca.unb.mobiledev.networkanalysis.radarview.RadarView\r\n                android:id=\"@+id/search_radar_view\"\r\n                android:layout_width=\"370dp\"\r\n                android:layout_height=\"372dp\" />\r\n            <androidx.recyclerview.widget.RecyclerView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n                xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n                xmlns:tools=\"http://schemas.android.com/tools\"\r\n                android:id=\"@+id/device_list\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                app:layoutManager=\"GridLayoutManager\"\r\n                tools:listitem=\"@layout/item_device_list\" />\r\n        </RelativeLayout>\r\n    </LinearLayout >\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_search.xml	(revision 6ea40b08109df005f0cfb3d8568dee4f4c7394db)
++++ app/src/main/res/layout/fragment_search.xml	(date 1617278703329)
+@@ -22,10 +22,11 @@
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             android:text=""/>
+-        <Button android:layout_height="wrap_content"
++        <ToggleButton android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:id="@+id/searchBtn"
+-            android:text="@string/search_control"
++            android:textOff="Pause Search"
++            android:textOn="Resume Search"
+             android:layout_marginBottom="10dp"/>
+         <ProgressBar
+             android:id="@+id/searchProgressBar"
+Index: app/src/main/java/ca/unb/mobiledev/networkanalysis/SearchViewModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ca.unb.mobiledev.networkanalysis;\r\n\r\nimport android.app.Application;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.lifecycle.AndroidViewModel;\r\nimport androidx.lifecycle.LiveData;\r\nimport androidx.lifecycle.MutableLiveData;\r\nimport androidx.lifecycle.ViewModel;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.concurrent.ExecutorService;\r\nimport java.util.concurrent.Executors;\r\n\r\nimport ca.unb.mobiledev.networkanalysis.network.Device;\r\nimport ca.unb.mobiledev.networkanalysis.network.devicescan.DeviceScanManager;\r\nimport ca.unb.mobiledev.networkanalysis.network.devicescan.DeviceScanResult;\r\n\r\npublic class SearchViewModel extends AndroidViewModel {\r\n    private DeviceScanManager mManager;\r\n    private MutableLiveData<List<Device>> mDeviceListLiveData ;\r\n    private List<Device> mDeviceList;\r\n    private ExecutorService threadPool;\r\n    private MutableLiveData<Integer> mScanProgress;\r\n\r\n    public SearchViewModel(@NonNull Application application){\r\n        super(application);\r\n        mDeviceList = new ArrayList<Device>();\r\n        threadPool = Executors.newSingleThreadExecutor();\r\n        mManager = new DeviceScanManager(application.getApplicationContext(), new DeviceScanResult() {\r\n            @Override\r\n            public void deviceScanResult(Device device, Integer progress) {\r\n                if (!mDeviceList.contains(device)) {\r\n                    mDeviceList.add(device);\r\n                    mDeviceListLiveData.postValue(mDeviceList);\r\n                }\r\n                mScanProgress.setValue(progress);\r\n            }\r\n        });\r\n        threadPool.execute(mManager);\r\n    }\r\n\r\n    public void stopScan(){\r\n        mManager.stopScan();\r\n    }\r\n\r\n    public void startScan(){\r\n        threadPool.execute(mManager);\r\n    }\r\n\r\n    LiveData<Integer> getProgress () {\r\n        if (mScanProgress==null){\r\n            mScanProgress = new MutableLiveData<Integer>();\r\n        }\r\n        return mScanProgress;\r\n    }\r\n\r\n    LiveData<List<Device>> getScanResult () {\r\n        if (mDeviceListLiveData==null){\r\n            mDeviceListLiveData = new MutableLiveData<List<Device>>();\r\n        }\r\n        return mDeviceListLiveData;\r\n    }\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/ca/unb/mobiledev/networkanalysis/SearchViewModel.java	(revision 6ea40b08109df005f0cfb3d8568dee4f4c7394db)
++++ app/src/main/java/ca/unb/mobiledev/networkanalysis/SearchViewModel.java	(date 1617290237837)
+@@ -1,6 +1,7 @@
+ package ca.unb.mobiledev.networkanalysis;
+ 
+ import android.app.Application;
++import android.content.Context;
+ 
+ import androidx.annotation.NonNull;
+ import androidx.lifecycle.AndroidViewModel;
+@@ -23,12 +24,29 @@
+     private List<Device> mDeviceList;
+     private ExecutorService threadPool;
+     private MutableLiveData<Integer> mScanProgress;
++    private Context mContext;
+ 
+     public SearchViewModel(@NonNull Application application){
+         super(application);
+         mDeviceList = new ArrayList<Device>();
++
++        mContext = application.getApplicationContext();
++
++        startScan();
++    }
++
++
++    public boolean stopScan(){
++        mManager.stopScan();
++        threadPool.shutdown();
++        return true;
++
++    }
++
++    public void startScan(){
++        mDeviceList.clear();
+         threadPool = Executors.newSingleThreadExecutor();
+-        mManager = new DeviceScanManager(application.getApplicationContext(), new DeviceScanResult() {
++        mManager = new DeviceScanManager(mContext, new DeviceScanResult() {
+             @Override
+             public void deviceScanResult(Device device, Integer progress) {
+                 if (!mDeviceList.contains(device)) {
+@@ -40,14 +58,6 @@
+         });
+         threadPool.execute(mManager);
+     }
+-
+-    public void stopScan(){
+-        mManager.stopScan();
+-    }
+-
+-    public void startScan(){
+-        threadPool.execute(mManager);
+-    }
+ 
+     LiveData<Integer> getProgress () {
+         if (mScanProgress==null){
+Index: app/src/main/java/ca/unb/mobiledev/networkanalysis/SearchFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ca.unb.mobiledev.networkanalysis;\r\n\r\nimport android.content.Context;\r\nimport android.net.wifi.WifiInfo;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.lifecycle.ViewModelProvider;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.concurrent.ExecutorService;\r\nimport java.util.concurrent.Executors;\r\n\r\nimport ca.unb.mobiledev.networkanalysis.adapter.SearchDeviceListAdapter;\r\nimport ca.unb.mobiledev.networkanalysis.network.Constant;\r\nimport ca.unb.mobiledev.networkanalysis.network.Device;\r\nimport ca.unb.mobiledev.networkanalysis.network.NetworkUtil;\r\nimport ca.unb.mobiledev.networkanalysis.network.devicescan.DeviceScanManager;\r\nimport ca.unb.mobiledev.networkanalysis.network.devicescan.DeviceScanResult;\r\nimport ca.unb.mobiledev.networkanalysis.radarview.RadarView;\r\n\r\n\r\npublic class SearchFragment extends Fragment {\r\n    private final static String TAG = \"SearchFragment\";\r\n\r\n    private View vSearchFragmentView;\r\n    private Context mContext;\r\n    private RecyclerView mDeviceListView;\r\n    private SearchDeviceListAdapter mDeviceListAdapter;\r\n    private ProgressBar mProgressBar;\r\n    private TextView tLocalIP;\r\n\r\n    private SearchViewModel mSearchViewModel;\r\n    private RadarView vRadarView;\r\n    private Button vSerachBtn;\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {\r\n        vSearchFragmentView = inflater.inflate(R.layout.fragment_search, container, false);\r\n\r\n        vRadarView = vSearchFragmentView.findViewById(R.id.search_radar_view);\r\n        vRadarView.setDirection(RadarView.ANTI_CLOCK_WISE);\r\n        vRadarView.start();\r\n        vSerachBtn =vSearchFragmentView.findViewById(R.id.searchBtn);\r\n        mDeviceListView = vSearchFragmentView.findViewById(R.id.device_list);\r\n        mProgressBar = vSearchFragmentView.findViewById(R.id.searchProgressBar);\r\n\r\n        tLocalIP = vSearchFragmentView.findViewById(R.id.localIp);\r\n        mContext = container.getContext();\r\n\r\n        StringBuffer mCurrConnStr = new StringBuffer();\r\n        mCurrConnStr.append(\"Local IP: \").append( NetworkUtil.getLocalIp()).append(\"\\n\");\r\n        mCurrConnStr.append(\"GateWay IP: \").append(NetworkUtil.getGateWayIp(mContext));\r\n\r\n        tLocalIP.setText(mCurrConnStr);\r\n        mProgressBar.setMax(Constant.PROGRESS_MAX);\r\n        mProgressBar.setProgress(0);\r\n\r\n        if (!NetworkUtil.isWifiConnected(mContext)) {\r\n            Toast.makeText(mContext,\r\n                    R.string.connect_wifi_please,Toast.LENGTH_SHORT).show();\r\n\r\n        }\r\n\r\n        mSearchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);\r\n        mSearchViewModel.getScanResult().observe(getViewLifecycleOwner(), deviceLiveData -> {\r\n            if(deviceLiveData !=null){\r\n                mDeviceListAdapter = new SearchDeviceListAdapter(mContext,deviceLiveData);\r\n                mDeviceListView.setAdapter(mDeviceListAdapter);\r\n            }\r\n            mDeviceListAdapter.notifyDataSetChanged();\r\n        });\r\n\r\n        mSearchViewModel.getProgress().observe(getViewLifecycleOwner(), progressValue -> {\r\n            if(progressValue !=null){\r\n                mProgressBar.setProgress(progressValue);\r\n            }\r\n\r\n        });\r\n\r\n        vSerachBtn.setOnClickListener(\r\n                new View.OnClickListener() {\r\n\r\n                    @Override\r\n                    public void onClick(View v) {\r\n                         mSearchViewModel.stopScan();\r\n                         vRadarView.stop();\r\n                    }\r\n                }\r\n        );\r\n\r\n        return vSearchFragmentView;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/ca/unb/mobiledev/networkanalysis/SearchFragment.java	(revision 6ea40b08109df005f0cfb3d8568dee4f4c7394db)
++++ app/src/main/java/ca/unb/mobiledev/networkanalysis/SearchFragment.java	(date 1617294066199)
+@@ -10,9 +10,11 @@
+ import android.view.View;
+ import android.view.ViewGroup;
+ import android.widget.Button;
++import android.widget.CompoundButton;
+ import android.widget.ProgressBar;
+ import android.widget.TextView;
+ import android.widget.Toast;
++import android.widget.ToggleButton;
+ 
+ 
+ import androidx.annotation.Nullable;
+@@ -45,7 +47,8 @@
+ 
+     private SearchViewModel mSearchViewModel;
+     private RadarView vRadarView;
+-    private Button vSerachBtn;
++    private ToggleButton vSerachBtn;
++
+     @Override
+     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+         vSearchFragmentView = inflater.inflate(R.layout.fragment_search, container, false);
+@@ -90,17 +93,21 @@
+ 
+         });
+ 
+-        vSerachBtn.setOnClickListener(
+-                new View.OnClickListener() {
+-
+-                    @Override
+-                    public void onClick(View v) {
+-                         mSearchViewModel.stopScan();
+-                         vRadarView.stop();
+-                    }
+-                }
+-        );
++        vSerachBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
++            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
++                if (isChecked) {
++                    mSearchViewModel.stopScan();
++                    vRadarView.stop();
++                } else {
++                    // The toggle is disabled
++                    mSearchViewModel.startScan();
++                    vRadarView.start();
++                }
++            }
++        });
+ 
+         return vSearchFragmentView;
+     }
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/ca/unb/mobiledev/networkanalysis/network/devicescan/DeviceScanManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ca.unb.mobiledev.networkanalysis.network.devicescan;\r\n\r\nimport android.content.Context;\r\nimport android.os.Build;\r\nimport android.os.Handler;\r\nimport android.os.Looper;\r\nimport android.os.Message;\r\nimport android.provider.ContactsContract;\r\nimport android.text.TextUtils;\r\n\r\nimport androidx.annotation.NonNull;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStreamReader;\r\nimport java.lang.ref.WeakReference;\r\nimport java.net.InetAddress;\r\nimport java.nio.charset.StandardCharsets;\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\nimport java.util.Iterator;\r\nimport java.util.List;\r\nimport java.util.concurrent.ArrayBlockingQueue;\r\nimport java.util.concurrent.Callable;\r\nimport java.util.concurrent.ExecutorService;\r\nimport java.util.concurrent.Executors;\r\nimport java.util.concurrent.Future;\r\nimport java.util.concurrent.ThreadPoolExecutor;\r\nimport java.util.concurrent.TimeUnit;\r\nimport java.util.regex.Matcher;\r\nimport java.util.regex.Pattern;\r\n\r\nimport ca.unb.mobiledev.networkanalysis.R;\r\nimport ca.unb.mobiledev.networkanalysis.network.Constant;\r\nimport ca.unb.mobiledev.networkanalysis.network.Device;\r\nimport ca.unb.mobiledev.networkanalysis.network.NetworkUtil;\r\n\r\npublic class DeviceScanManager implements Runnable\r\n{\r\n    private final static String TAG = \"DeviceScanManager\";\r\n\r\n    private final DeviceScanManagerHandler mDeviceScanManagerHandler = new DeviceScanManagerHandler(this);\r\n    private static List<String> mIpInLan = Collections.synchronizedList(new ArrayList());\r\n    private static Iterator mIpScanIterator = mIpInLan.iterator();\r\n    private DeviceScanResult mScanResult;\r\n    private Integer mProgress;\r\n    private ExecutorService mExecutor;\r\n    private Context mContext;\r\n\r\n    public static final int  MESSAGE_SCAN_ONE = 200001;\r\n\r\n    public DeviceScanManager(Context context, DeviceScanResult scanResult) {\r\n        mScanResult = scanResult;\r\n        mContext = context;\r\n        mProgress = 0;\r\n    }\r\n\r\n\r\n    @Override\r\n    public void run() {\r\n        Looper.prepare();\r\n        Looper.myLooper();\r\n        startScan();\r\n    }\r\n\r\n    public void startScan()\r\n    {\r\n        List<Device> deviceList;\r\n        String localIp = NetworkUtil.getLocalIp();\r\n        String routerIp = NetworkUtil.getGateWayIp(mContext);\r\n        if (TextUtils.isEmpty(localIp) || TextUtils.isEmpty(routerIp))\r\n            return;\r\n        mIpInLan.addAll(NetworkUtil.getSubnet(localIp,true));\r\n\r\n        //init a thread pool\r\n        mExecutor= Executors.newFixedThreadPool(Constant.SCAN_COUNT);\r\n\r\n        for (String mIP : mIpInLan) {\r\n            ScanTasks mScanTask = new ScanTasks(mIP,mDeviceScanManagerHandler);\r\n            mExecutor.submit(mScanTask);\r\n        }\r\n        //waiting for all task completed\r\n        mExecutor.shutdown();\r\n\r\n        while (!mExecutor.isTerminated()) {\r\n            try {\r\n                Thread.sleep(1000);\r\n                mProgress++;\r\n            } catch (InterruptedException e) {\r\n                e.printStackTrace();\r\n            }\r\n        }\r\n        mProgress = Constant.PROGRESS_MAX;\r\n    }\r\n\r\n    public void stopScan()\r\n    {\r\n        if (mExecutor != null)\r\n        {\r\n            mExecutor.shutdownNow();\r\n        }\r\n    }\r\n\r\n    private String parseHostInfo(String mac) {\r\n        return Manufacture.getInstance()\r\n                .getManufacture(mac, mContext);\r\n    }\r\n\r\n    class ScanTasks implements Callable {\r\n        private String mIpAddr;\r\n        private DeviceScanManagerHandler mHandler;\r\n\r\n        public ScanTasks(String ipAddr, DeviceScanManagerHandler deviceScanManagerHandler) {\r\n            mIpAddr = ipAddr;\r\n            mHandler = deviceScanManagerHandler;\r\n        }\r\n\r\n        @Override\r\n        public Device call() {\r\n\r\n            NetworkUtil.isPingOk(mIpAddr);\r\n\r\n            Device mDevice = null;\r\n            BufferedReader br = null;\r\n            try {\r\n\r\n                Process ipProc = Runtime.getRuntime().exec(\"ip neighbor show \" + mIpAddr);\r\n                ipProc.waitFor();\r\n                if (ipProc.exitValue() != 0) {\r\n                    throw new Exception(\"Unable to access ARP entries\");\r\n                }\r\n\r\n                br = new BufferedReader(new InputStreamReader(ipProc.getInputStream(), StandardCharsets.UTF_8));\r\n                String line;\r\n                while ((line = br.readLine()) != null) {\r\n                    String[] neighborLine = line.split(\"\\\\s+\");\r\n                    if (neighborLine.length <= 4) {\r\n                        continue;\r\n                    }\r\n                    String ip = neighborLine[0];\r\n                    InetAddress addr = InetAddress.getByName(ip);\r\n                    if (addr.isLinkLocalAddress() || addr.isLoopbackAddress()) {\r\n                        continue;\r\n                    }\r\n                    String macAddress = neighborLine[4];\r\n                    String state = neighborLine[neighborLine.length - 1];\r\n\r\n                    if (!state.equals(R.string.NEIGHBOR_REACHABLE) && !state.equals(R.string.NEIGHBOR_INCOMPLETE)) {\r\n                        String vendor = parseHostInfo(macAddress);\r\n                        if(TextUtils.isEmpty(vendor)){\r\n                            vendor =\"UNKNOWN\";\r\n                        }else{\r\n                            vendor = vendor.substring(0,10);\r\n                        }\r\n                        mDevice = new Device(ip, macAddress, vendor);\r\n                        mDeviceScanManagerHandler.sendMessage(\r\n                                mDeviceScanManagerHandler.obtainMessage(\r\n                                        Constant.MSG.SCAN_ONE, mDevice));\r\n                    }\r\n                }\r\n\r\n            } catch (FileNotFoundException e) {\r\n                e.printStackTrace();\r\n            } catch (Exception e) {\r\n                e.printStackTrace();\r\n            } finally {\r\n                try {\r\n                    if (br != null) {\r\n                        br.close();\r\n                    }\r\n                } catch (IOException e) {\r\n                }\r\n            }\r\n            return mDevice;\r\n        }\r\n\r\n    }\r\n\r\n     class DeviceScanManagerHandler extends Handler\r\n    {\r\n        private WeakReference<DeviceScanManager> weakReference;\r\n\r\n        public DeviceScanManagerHandler(DeviceScanManager manager)\r\n        {\r\n            weakReference = new WeakReference<>(manager);\r\n        }\r\n\r\n        @Override\r\n        public void handleMessage(Message msg)\r\n        {\r\n            DeviceScanManager manager = weakReference.get();\r\n            if (manager == null)\r\n                return;\r\n            switch (msg.what)\r\n            {\r\n                case Constant.MSG.SCAN_ONE :\r\n                    if (manager.mScanResult != null)\r\n                    {\r\n                        Device ip_mac = (Device) msg.obj;\r\n                        if (ip_mac != null)\r\n                            manager.mScanResult.deviceScanResult(ip_mac,mProgress);\r\n                    }\r\n                    break;\r\n                case Constant.MSG.SCAN_OVER :\r\n                    break;\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/ca/unb/mobiledev/networkanalysis/network/devicescan/DeviceScanManager.java	(revision 6ea40b08109df005f0cfb3d8568dee4f4c7394db)
++++ app/src/main/java/ca/unb/mobiledev/networkanalysis/network/devicescan/DeviceScanManager.java	(date 1617294166211)
+@@ -23,10 +23,12 @@
+ import java.util.Iterator;
+ import java.util.List;
+ import java.util.concurrent.ArrayBlockingQueue;
++import java.util.concurrent.BlockingQueue;
+ import java.util.concurrent.Callable;
+ import java.util.concurrent.ExecutorService;
+ import java.util.concurrent.Executors;
+ import java.util.concurrent.Future;
++import java.util.concurrent.Semaphore;
+ import java.util.concurrent.ThreadPoolExecutor;
+ import java.util.concurrent.TimeUnit;
+ import java.util.regex.Matcher;
+@@ -48,25 +50,34 @@
+     private Integer mProgress;
+     private ExecutorService mExecutor;
+     private Context mContext;
+-
+-    public static final int  MESSAGE_SCAN_ONE = 200001;
++    private ArrayBlockingQueue mTaskQueue;
++    private volatile boolean mRun;
+ 
+     public DeviceScanManager(Context context, DeviceScanResult scanResult) {
+         mScanResult = scanResult;
+         mContext = context;
++        mTaskQueue = new ArrayBlockingQueue<Callable>(Constant.IP_COUNT);
++        //init a thread pool
++        mExecutor= new ThreadPoolExecutor(Constant.SCAN_COUNT/2, Constant.SCAN_COUNT, 0L, TimeUnit.MILLISECONDS, mTaskQueue);
+         mProgress = 0;
+     }
+ 
+ 
+     @Override
+     public void run() {
+-        Looper.prepare();
+-        Looper.myLooper();
+-        startScan();
++        if (Looper.myLooper()==null) {
++            Looper.prepare();
++            Looper.myLooper();
++        }
++        mRun = true;
++        try {
++            startScan();
++        }catch (Exception e){
++
++        }
+     }
+ 
+-    public void startScan()
+-    {
++    public void startScan() throws InterruptedException {
+         List<Device> deviceList;
+         String localIp = NetworkUtil.getLocalIp();
+         String routerIp = NetworkUtil.getGateWayIp(mContext);
+@@ -74,20 +85,25 @@
+             return;
+         mIpInLan.addAll(NetworkUtil.getSubnet(localIp,true));
+ 
+-        //init a thread pool
+-        mExecutor= Executors.newFixedThreadPool(Constant.SCAN_COUNT);
+-
+         for (String mIP : mIpInLan) {
+-            ScanTasks mScanTask = new ScanTasks(mIP,mDeviceScanManagerHandler);
+-            mExecutor.submit(mScanTask);
++            if(!mExecutor.isShutdown()) {
++                ScanTasks mScanTask = new ScanTasks(mIP, mDeviceScanManagerHandler);
++                mExecutor.submit(mScanTask);
++                Thread.sleep(100);
++            }
+         }
+         //waiting for all task completed
+         mExecutor.shutdown();
+ 
+-        while (!mExecutor.isTerminated()) {
++        while ( !mExecutor.isTerminated()) {
+             try {
+-                Thread.sleep(1000);
+-                mProgress++;
++                if(mRun) {
++                    Thread.sleep(2000);
++                }else{
++                    mTaskQueue.clear();
++                    mExecutor.shutdownNow();
++                }
++
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+             }
+@@ -99,7 +115,9 @@
+     {
+         if (mExecutor != null)
+         {
+-            mExecutor.shutdownNow();
++            mDeviceScanManagerHandler.sendMessage(
++                    mDeviceScanManagerHandler.obtainMessage(
++                            Constant.MSG.STOP));
+         }
+     }
+ 
+@@ -159,6 +177,9 @@
+                                 mDeviceScanManagerHandler.obtainMessage(
+                                         Constant.MSG.SCAN_ONE, mDevice));
+                     }
++                    mDeviceScanManagerHandler.sendMessage(
++                            mDeviceScanManagerHandler.obtainMessage(
++                                    Constant.MSG.SCAN_OVER) );
+                 }
+ 
+             } catch (FileNotFoundException e) {
+@@ -178,7 +199,7 @@
+ 
+     }
+ 
+-     class DeviceScanManagerHandler extends Handler
++    class DeviceScanManagerHandler extends Handler
+     {
+         private WeakReference<DeviceScanManager> weakReference;
+ 
+@@ -204,6 +225,10 @@
+                     }
+                     break;
+                 case Constant.MSG.SCAN_OVER :
++                    mProgress ++;
++                    break;
++                case Constant.MSG.STOP :
++                    mRun=false;
+                     break;
+             }
+         }
