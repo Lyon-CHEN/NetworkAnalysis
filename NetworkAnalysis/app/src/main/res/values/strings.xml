@@ -32,4 +32,7 @@
     <string name="connecting_data">Connect to Data:</string>
     <string name="testUploadResult">Upload</string>
     <string name="search_control">Stop</string>
+    <string name="head_SSID">SSID</string>
+    <string name="head_frequency">Frequency</string>
+    <string name="head_strength">(-dBm)</string>
 </resources>
