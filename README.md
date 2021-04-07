@@ -33,7 +33,7 @@
 	- INTERNET			#be required for speed test
 ## Test Cases:
 - Test on:  RedMI Note8 Pro. 
-Case1: 首次运行权限申请
+Case1: 首次运行权限申请</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-7.png) </br>
 Case2: Wifi 扫描，每20秒刷新 </br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-1.png) </br>
