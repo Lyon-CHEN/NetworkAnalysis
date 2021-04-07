@@ -37,9 +37,11 @@
 ***
 ## Key Technology
 - WiFi scanning: 
-	- Register for the android broadcast, and listen to the Wifi scan result refresh every 20 seconds.
+	- Fragment(UI) 观察Model里的数据变化，来更新Wifi列表显示
+	- 根据wifi强度，list列可以显示不同的图标
+	- Model 里Register for the android broadcast, and listen to the Wifi scan result refresh a livedata list every 20 seconds.        
 	- Architecture
- 
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
 - Device scanning: 
 - Speed test:
 - Network diagnosis:
