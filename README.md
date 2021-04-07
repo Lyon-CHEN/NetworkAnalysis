@@ -50,30 +50,33 @@ Case7: 语言切换，现在支持中文和English</br>
 ***
 ## Key Technology
 - WiFi scanning: 
-	- MVVM结构，Fragment(UI) 观察Model里的数据变化，来更新Wifi列表显示
-	- 根据wifi强度，list列可以显示不同的图标
-	- Model 里Register for the android broadcast, and listen to the Wifi scan result refresh a livedata list every 20 seconds.        
+	- Using MVVM model，Fragment(UI) refresh list when monitoring Wifi list
+	- Evaluate wifi strength using different icons.
+	- Register for the android broadcast in model, and listen to the Wifi scan result refresh a livedata list every 20 seconds.        
 	- Architecture
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
 - Device scanning: 
-	- MVVM和Room框架， 
-	- 调用系统命令进行ping操作，扫描网络中设备，采用多线程方式
-	- 扫描过程中显示动画
-	- 通过ip neighbor读取arp表，并提取Mac address, 用来判断设备是否在线
-	- 下载IEEE官方组织的Oui设备文件，导入数据库。
-	- 通过Mac address在Oui数据库中找到厂商信息
-	- 数据库使用Room框架
+	- Using MVVM and Room frame
+	- Use multithread to scan devices in network, ping operation from system command is used
+	- Animation are showing while scanning
+	- Fetch arp table by ip neighbour and find device ststus with Mac address
+	- Download IEEE official Oui device file in database
+	- Find manufacturer by search Oui database via Mac address
+	- Using Room frame on Database
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png)
 - Speed test:
-	- MVVM框架	
-	- 使用JSpeedTest的三方库，兼容speedtest测速
-	- 下载和上传操作互斥，使用信号量控制
+	- Using MVVM model	
+	- Using JSpeedTest third-party lib which is compatible with speedtest
+	- Use signal to control Download and Upload Tests
 - Network diagnosis:
-	- 通过系统服务判断wifi和数据连接
-	- 通过Ping判断Gateway和DNS连接是否正常
-	- 通过对google.com解析，判断DNS解析正常
+	- Detect Wifi and Data status via system services
+	- Check gateway and DNS connection by looking at Pings.
+	- By analyzing google.com, to judged if the DNS  is normal
 - Setting
-	- 通过...实现theme切换
+	- Using MVVM model, monitoring scope change and value picked by user
+	- Setup 2 layer of list menus, developer can easily add and delete different double-level menus by munipulating arrays
+	- Theme switch are modulized, developer can add theme quick by adding new style under theme.xml
+	- listview are refreshing between different datas, take less time and save more space.(manually delay can solve the animation effect display issue)
 ***
 ## Todo list
 - [ ] Add WiFi security detection function, such as encryption method, weak password detection, etc.
