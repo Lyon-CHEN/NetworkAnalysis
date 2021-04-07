@@ -37,24 +37,43 @@
 ***
 ## Key Technology
 - WiFi scanning: 
-	- Fragment(UI) 观察Model里的数据变化，来更新Wifi列表显示
+	- MVVM结构，Fragment(UI) 观察Model里的数据变化，来更新Wifi列表显示
 	- 根据wifi强度，list列可以显示不同的图标
 	- Model 里Register for the android broadcast, and listen to the Wifi scan result refresh a livedata list every 20 seconds.        
 	- Architecture
-![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
+	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
 - Device scanning: 
+	- MVVM结构， 
+	- 调用系统命令进行ping操作，扫描网络中设备，采用多线程方式
+	- 扫描过程中显示动画
+	- 通过ip neighbor读取arp表，并提取Mac address, 用来判断设备是否在线
+	- 下载IEEE官方组织的Oui设备文件，导入数据库。
+	- 通过Mac address在Oui数据库中找到厂商信息
+	- 数据库使用Room框架
+	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png)
 - Speed test:
+	- MVVM结构， 	
+	- 使用JSpeedTest的三方库，兼容speedtest测速
+	- 下载和上传操作互斥，使用信号量控制
 - Network diagnosis:
+	- 通过系统服务判断wifi和数据连接
+	- 通过Ping判断Gateway和DNS连接是否正常
+	- 通过对google.com解析，判断DNS解析正常
+- Setting
+	- 通过...实现theme切换
 ***
 ## Todo list
 - [ ] Add WiFi security detection function, such as encryption method, weak password detection, etc.
 - [ ] Add port scanning, and identify the port service protol, like Http/Https, SSH, Bonjour, Samba...
+- [ ] 通过测速站点选择，已通过API实现获取附近SpeedTest服务器列表。
 - [ ] Improving UI
 
 ***
 ## Bug/Issue
 The DNS resolution check function is compatible with some computers, the no class def found error of Landroid / net / Dns Resolver will occur.
 Temporary solution: annotation checkResolvingName() function in FixerViewModel.java
+
+默认使用法国服务器测速，数据不精确
 ## Changlog
 ***
 ## External libraries
