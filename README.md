@@ -33,7 +33,20 @@
 	- INTERNET			#be required for speed test
 ## Test Cases:
 - Test on:  RedMI Note8 Pro. 
-
+Case1: 首次运行权限申请
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-7.png) </br>
+Case2: Wifi 扫描，每20秒刷新 </br>
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-1.png) </br>
+Case3: 局域网设备扫描，可能显示IP,MAC和设备厂商，扫描比较慢，可以通过按键暂停</br>
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-2.png) </br>
+Case4: 分别测试上传和下载速度，通过KB/s显示</br>
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-3.png) </br>
+Case5: 诊断网络连接</br>
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-4.png) </br>
+Case6: 主题切换，默认提供两个</br>
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-5.png) </br>
+Case7: 语言切换，现在支持中文和English</br>
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-6.png) </br>
 ***
 ## Key Technology
 - WiFi scanning: 
@@ -43,7 +56,7 @@
 	- Architecture
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
 - Device scanning: 
-	- MVVM结构， 
+	- MVVM和Room框架， 
 	- 调用系统命令进行ping操作，扫描网络中设备，采用多线程方式
 	- 扫描过程中显示动画
 	- 通过ip neighbor读取arp表，并提取Mac address, 用来判断设备是否在线
@@ -52,7 +65,7 @@
 	- 数据库使用Room框架
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png)
 - Speed test:
-	- MVVM结构， 	
+	- MVVM框架	
 	- 使用JSpeedTest的三方库，兼容speedtest测速
 	- 下载和上传操作互斥，使用信号量控制
 - Network diagnosis:
@@ -78,5 +91,6 @@ Temporary solution: annotation checkResolvingName() function in FixerViewModel.j
 ***
 ## External libraries
 [JSpeedTest:] (https://github.com/bertrandmartel/speed-test-lib)</br>
-[WiFiDetective:] (https://github.com/gpfduoduo/WiFiDetective)
+[WiFiDetective:] (https://github.com/gpfduoduo/WiFiDetective) </br>
+[RadarView]
 
