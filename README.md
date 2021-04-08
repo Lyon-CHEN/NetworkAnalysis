@@ -96,5 +96,3 @@ The French server is used for speed measurement by default, and the data is not 
 ## External libraries
 [JSpeedTest:] (https://github.com/bertrandmartel/speed-test-lib)</br>
 [WiFiDetective:] (https://github.com/gpfduoduo/WiFiDetective) </br>
-[RadarView]
-
