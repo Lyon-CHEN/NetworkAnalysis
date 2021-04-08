@@ -28,24 +28,24 @@
 	- ACCESS_NETWORK_STATE
 	- ACCESS_WIFI_STATE
 	- CHANGE_WIFI_STATE
-	- ACCESS_FINE_LOCATION		#be requried for wifi ssid scan, 第一次运行时会检查授权
+	- ACCESS_FINE_LOCATION		#be requried for wifi ssid scan, check permission on first-time run
 	- ACCESS_COARSE_LOCATION	#be requried for wifi ssid scan
 	- INTERNET			#be required for speed test
 ## Test Cases:
 - Test on:  RedMI Note8 Pro. 
-Case1: 首次运行权限申请</br>
+Case1: First run permission request</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-7.png) </br>
-Case2: Wifi 扫描，每20秒刷新 </br>
-![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-1.png) </br>
-Case3: 局域网设备扫描，可能显示IP,MAC和设备厂商，扫描比较慢，可以通过按键暂停</br>
+Case2: Wifi scan, refresh every 20 seconds </br>
+![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-1s.png) </br>
+Case3: LAN device scan displays IP, MAC and device manufacturer, scan might be slow and you can pause by pressing the button</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-2.png) </br>
-Case4: 分别测试上传和下载速度，通过KB/s显示</br>
+Case4: Test download and upload speed seperately and show in Kb/s</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-3.png) </br>
-Case5: 诊断网络连接</br>
+Case5: Diagnose network connection</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-4.png) </br>
-Case6: 主题切换，默认提供两个</br>
+Case6: Theme color switching, two are provided by default</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-5.png) </br>
-Case7: 语言切换，现在支持中文和English</br>
+Case7: Language switching, now supports Chinese and English</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-6.png) </br>
 ***
 ## Key Technology
@@ -81,7 +81,7 @@ Case7: 语言切换，现在支持中文和English</br>
 ## Todo list
 - [ ] Add WiFi security detection function, such as encryption method, weak password detection, etc.
 - [ ] Add port scanning, and identify the port service protol, like Http/Https, SSH, Bonjour, Samba...
-- [ ] 通过测速站点选择，已通过API实现获取附近SpeedTest服务器列表。
+- [ ] Through the speed test site selection, the list of nearby SpeedTest servers has been obtained through API
 - [ ] Improving UI
 
 ***
@@ -89,7 +89,7 @@ Case7: 语言切换，现在支持中文和English</br>
 The DNS resolution check function is compatible with some computers, the no class def found error of Landroid / net / Dns Resolver will occur.
 Temporary solution: annotation checkResolvingName() function in FixerViewModel.java
 
-默认使用法国服务器测速，数据不精确
+The French server is used for speed measurement by default, and the data is not accurate due to that.
 ## Changlog
 ***
 ## External libraries
