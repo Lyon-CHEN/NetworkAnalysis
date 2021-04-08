@@ -3,7 +3,7 @@
 ## Function & Features
 - WiFi scanning: 
 	- Get the WiFi SSID access points around the android device
-	- Collect information: SSID, WiFi signal strength, channel and encryption method.
+	- Collect information: SSID name, signal strength and frequency channel.
 - Device scanning: 
 	- Scan all alive devices which under the wifi your android device is located and connected. 
 	- Identify the device's manufacturer base on Mac address.
@@ -12,10 +12,9 @@
 - Network diagnosis
 	- Connectivity to gateway
 	- Connectivity to DNS Server
-	- Resovling Domain name(default:www.google.com)
-	
+	- Resovling Domain name(default:www.google.com)	
 - Setting
-	- Language support:
+	- Language support: English, Chinese
 	- Theme
 ***
 ## Compatibility
