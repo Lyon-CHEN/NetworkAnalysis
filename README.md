@@ -63,7 +63,7 @@ Case7: Language switching, now supports Chinese and English</br>
 	- Download IEEE official Oui device file in database
 	- Find manufacturer by search Oui database via Mac address
 	- Using Room frame on Database</br>
-	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scana-fragment.png)
+	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png)
 - Speed test:
 	- Using MVVM model	
 	- Using JSpeedTest third-party lib which is compatible with speedtest
