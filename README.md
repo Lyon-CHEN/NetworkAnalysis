@@ -68,6 +68,7 @@ Case7: Language switching, now supports Chinese and English</br>
 	- Using MVVM model	
 	- Using JSpeedTest third-party lib which is compatible with speedtest
 	- Use signal to control Download and Upload Tests
+	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/test-fragment.png)
 - Network diagnosis:
 	- Detect Wifi and Data status via system services
 	- Check gateway and DNS connection by looking at Pings.
