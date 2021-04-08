@@ -50,24 +50,24 @@ Case7: Language switching, now supports Chinese and English</br>
 ***
 ## Key Technology
 - WiFi scanning: 
-	- Using MVVM model，Fragment(UI) refresh list when monitoring Wifi list
-	- Evaluate wifi strength using different icons.
+	- Using MVVM model 
+	- Evaluate wifi strength then applying different icons.
 	- Register for the android broadcast in model, and listen to the Wifi scan result refresh a livedata list every 20 seconds.        
 	- Architecture</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
 - Device scanning: 
 	- Using MVVM and Room frame
-	- Use multithread to scan devices in network, ping operation from system command is used
+	- Use multithread pool to scan devices in same network, the 'ping' system command is used
 	- Animation are showing while scanning
-	- Fetch arp table by ip neighbour and find device ststus with Mac address
-	- Download IEEE official Oui device file in database
+	- Fetch arp table and find device status by 'ip neighbour' command
+	- Upload IEEE official Oui device file in Sqlite database
 	- Find manufacturer by search Oui database via Mac address
 	- Using Room frame on Database</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png)
 - Speed test:
 	- Using MVVM model	
 	- Using JSpeedTest third-party lib which is compatible with speedtest
-	- Use signal to control Download and Upload Tests</br>
+	- Use semaphore to control Download and Upload Tests</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/test-fragment.png)
 - Network diagnosis:
 	- Detect Wifi and Data status via system services
