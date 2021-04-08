@@ -71,8 +71,8 @@ Case7: Language switching, now supports Chinese and English</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/test-fragment.png)
 - Network diagnosis:
 	- Detect Wifi and Data status via system services
-	- Check gateway and DNS connection by looking at Pings.
-	- By analyzing google.com, to judged if the DNS  is normal
+	- Check gateway and DNS connection by Ping command.
+	- By test resolving dns name of 'www.google.com', to judged if the DNS  is normal
 - Setting
 	- Using MVVM model, monitoring scope change and value picked by user
 	- Setup 2 layer of list menus, developer can easily add and delete different double-level menus by munipulating arrays
