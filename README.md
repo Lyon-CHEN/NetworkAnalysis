@@ -81,7 +81,7 @@ Case7: Language switching, now supports Chinese and English</br>
 ## Todo list
 - [ ] Add WiFi security detection function, such as encryption method, weak password detection, etc.
 - [ ] Add port scanning, and identify the port service protol, like Http/Https, SSH, Bonjour, Samba...
-- [ ] Through the speed test site selection, the list of nearby SpeedTest servers has been obtained through API
+- [ ] Add Speed Test Location Selector, So you can choose the nearest SpeedTest Servers or the server which your want to run speed test. The server list can obtail according to geographic informationhas.
 - [ ] Improving UI
 
 ***
@@ -92,6 +92,6 @@ Temporary solution: annotation checkResolvingName() function in FixerViewModel.j
 The French server is used for speed measurement by default, and the data is not accurate due to that.
 ## Changlog
 ***
-## External libraries
+## References/External libraries
 [JSpeedTest:] (https://github.com/bertrandmartel/speed-test-lib)</br>
 [WiFiDetective:] (https://github.com/gpfduoduo/WiFiDetective) </br>
