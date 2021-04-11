@@ -73,14 +73,17 @@ public class DeviceScanManager implements Runnable
         while (!mExecutor.isTerminated()) {
             try {
                 if(mRun ==1){
-                    String mIP = (String) mIpInLan.get(count);
+                    if(count == mIpInLan.size()) {
+                        stopScan();
+                    }else {
+                        String mIP = (String) mIpInLan.get(count);
 
-                    if(!mExecutor.isShutdown()) {
-                        ScanTasks mScanTask = new ScanTasks(mIP,mDeviceScanManagerHandler);
-                        mExecutor.submit(mScanTask);
-                        count++;
+                        if (!mExecutor.isShutdown()) {
+                            ScanTasks mScanTask = new ScanTasks(mIP, mDeviceScanManagerHandler);
+                            mExecutor.submit(mScanTask);
+                            count++;
+                        }
                     }
-
                 } else if(mRun ==2){
                     count=0;
                     mIpInLan.clear();
@@ -213,15 +216,19 @@ public class DeviceScanManager implements Runnable
             switch (msg.what)
             {
                 case Constant.MSG.SCAN_ONE :
+                    manager.mProgress=count;
                     if (manager.mScanResult != null)
                     {
                         Device device = (Device) msg.obj;
-                        if (device != null)
-                            manager.mScanResult.deviceScanResult(device,mProgress);
+                        if (device != null) {
+                            manager.mScanResult.updateProgress(manager.mProgress);
+                            manager.mScanResult.deviceScanResult(device);
+                        }
                     }
                     break;
                 case Constant.MSG.SCAN_OVER :
-                    manager.mProgress++;
+                    manager.mProgress=count;
+                    manager.mScanResult.updateProgress(manager.mProgress);
                     break;
                 case Constant.MSG.START :
                     manager.mRun = 1;
@@ -229,6 +236,7 @@ public class DeviceScanManager implements Runnable
                     break;
                 case Constant.MSG.STOP :
                     manager.mRun =2;
+                    mProgress=Constant.IP_COUNT;
                     break;
             }
         }

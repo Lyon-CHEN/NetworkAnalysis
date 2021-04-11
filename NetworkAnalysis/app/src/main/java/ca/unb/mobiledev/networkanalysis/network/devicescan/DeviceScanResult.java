@@ -4,6 +4,7 @@ import ca.unb.mobiledev.networkanalysis.network.Device;
 
 public interface DeviceScanResult
 {
-    public void deviceScanResult(Device device, Integer progress);
+    public void deviceScanResult(Device device);
+    public void updateProgress(Integer progress);
 }
 
