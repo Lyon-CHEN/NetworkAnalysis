@@ -30,11 +30,15 @@ public class SearchViewModel extends AndroidViewModel {
         threadPool = Executors.newSingleThreadExecutor();
         mManager = new DeviceScanManager(application.getApplicationContext(), new DeviceScanResult() {
             @Override
-            public void deviceScanResult(Device device, Integer progress) {
+            public void deviceScanResult(Device device) {
                 if (!mDeviceList.contains(device)) {
                     mDeviceList.add(device);
                     mDeviceListLiveData.postValue(mDeviceList);
                 }
+            }
+
+            @Override
+            public void updateProgress(Integer progress) {
                 mScanProgress.setValue(progress);
             }
         });
