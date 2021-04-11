@@ -86,8 +86,11 @@ Case7: Language switching, now supports Chinese and English</br>
 
 ***
 ## Bug/Issue
-The DNS resolution check function is compatible with some computers, the no class def found error of Landroid / net / Dns Resolver will occur.
-Temporary solution: annotation checkResolvingName() function in FixerViewModel.java
+The DNS resolution check function is compatible with some computers, the no class def found error of Landroid / net / Dns Resolver will occur.</br>
+Temporary solution: annotation checkResolvingName() function in FixerViewModel.java</br>
+
+Some Apple devices block the real Mac address by a Private Address, which makes it hard to obtain manufacturer information through mac address. </br>
+Resolve solution: Determined by device communication protocol or port protocol</br>
 
 The French server is used for speed measurement by default, and the data is not accurate due to that.
 ## Changlog
