@@ -4,18 +4,49 @@
 - WiFi scanning: 
 	- Get the WiFi SSID access points around the android device
 	- Collect information: SSID name, signal strength and frequency channel.
+	- Key Point
+		- Using MVVM model 
+		- Evaluate wifi strength then applying different icons.
+		- Register for the android broadcast in model, and listen to the Wifi scan result refresh a livedata list every 20 seconds.        
+	- Architecture</br>
+	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
 - Device scanning: 
 	- Scan all alive devices which under the wifi your android device is located and connected. 
 	- Identify the device's manufacturer base on Mac address.
+	- Key Point
+		- Using MVVM and Room frame
+		- Use multithread pool to scan devices in same network, the 'ping' system command is used
+		- Animation are showing while scanning
+		- Fetch arp table and find device status by 'ip neighbour' command
+		- Upload IEEE official Oui device file in Sqlite database
+		- Find manufacturer by search Oui database via Mac address
+		- Using Room frame on Database</br>
+	-  Architecture</br>
+	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png) 
 - Speed test:
 	- Test the upload and download speed under the current network connection through JSpeedTest Lib.
+	- Key Point
+		- Using MVVM model	
+		- Using JSpeedTest third-party lib which is compatible with speedtest
+		- Use semaphore to control Download and Upload Tests</br>
+	-  Architecture</br>
+	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/test-fragment.png)
 - Network diagnosis
 	- Connectivity to gateway
 	- Connectivity to DNS Server
 	- Resovling Domain name(default:www.google.com)	
+	- Key Point
+		-  Detect Wifi and Data status via system services
+		- Check gateway and DNS connection by Ping command.
+		- By test resolving dns name of 'www.google.com', to judged if the DNS  is normal
 - Setting
 	- Language support: English, Chinese
 	- Theme
+	- Key Point
+		- Using MVVM model, monitoring scope change and value picked by user
+		- Setup 2 layer of list menus, developer can easily add and delete different double-level menus by munipulating arrays
+		- Theme switch are modulized, developer can add theme quick by adding new style under theme.xml
+		- listview are refreshing between different datas, take less time and save more space.(manually delay can solve the animation effect display issue)
 ***
 ## Compatibility
 - Platform:
@@ -46,37 +77,6 @@ Case6: Theme color switching, two are provided by default</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-5.png) </br>
 Case7: Language switching, now supports Chinese and English</br>
 ![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/screenshot-6.png) </br>
-***
-## Key Technology
-- WiFi scanning: 
-	- Using MVVM model 
-	- Evaluate wifi strength then applying different icons.
-	- Register for the android broadcast in model, and listen to the Wifi scan result refresh a livedata list every 20 seconds.        
-	- Architecture</br>
-	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
-- Device scanning: 
-	- Using MVVM and Room frame
-	- Use multithread pool to scan devices in same network, the 'ping' system command is used
-	- Animation are showing while scanning
-	- Fetch arp table and find device status by 'ip neighbour' command
-	- Upload IEEE official Oui device file in Sqlite database
-	- Find manufacturer by search Oui database via Mac address
-	- Using Room frame on Database</br>
-	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png)
-- Speed test:
-	- Using MVVM model	
-	- Using JSpeedTest third-party lib which is compatible with speedtest
-	- Use semaphore to control Download and Upload Tests</br>
-	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/test-fragment.png)
-- Network diagnosis:
-	- Detect Wifi and Data status via system services
-	- Check gateway and DNS connection by Ping command.
-	- By test resolving dns name of 'www.google.com', to judged if the DNS  is normal
-- Setting
-	- Using MVVM model, monitoring scope change and value picked by user
-	- Setup 2 layer of list menus, developer can easily add and delete different double-level menus by munipulating arrays
-	- Theme switch are modulized, developer can add theme quick by adding new style under theme.xml
-	- listview are refreshing between different datas, take less time and save more space.(manually delay can solve the animation effect display issue)
 ***
 ## Todo list
 - [ ] Add WiFi security detection function, such as encryption method, weak password detection, etc.
