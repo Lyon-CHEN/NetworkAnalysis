@@ -32,9 +32,9 @@
 	-  Architecture</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/test-fragment.png)
 - Network diagnosis
-	- Connectivity to gateway
-	- Connectivity to DNS Server
-	- Resovling Domain name(default:www.google.com)	
+	- Test the connection with the Gateway
+	- Test the connection with the DNS Server
+	- Test DNS domain name resolution(default:www.google.com)	
 	- Key Point
 		-  Detect Wifi and Data status via system services
 		- Check gateway and DNS connection by Ping command.
