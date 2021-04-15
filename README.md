@@ -7,7 +7,7 @@
 	- Key Point
 		- Using MVVM model 
 		- Evaluate wifi strength then applying different icons.
-		- Register for the android broadcast, and monitoring to the change of Wifi scan result every 20 seconds,  then refresh data.    
+		- Register for the android broadcast, and monitoring and refreshing Wifi scan result every 20 seconds.    
 	- Architecture</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
 - Device scanning: 
