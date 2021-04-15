@@ -7,7 +7,7 @@
 	- Key Point
 		- Using MVVM model 
 		- Evaluate wifi strength then applying different icons.
-		- Register for the android broadcast, and monitoring and refreshing Wifi scan result every 20 seconds.    
+		- By register with the android broadcast, the module monitor and refresh Wifi scan result every 20 seconds.    
 	- Architecture</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/wifi-fragment.png)
 - Device scanning: 
@@ -19,12 +19,12 @@
 		- Using multithread pool to scan devices in network, the 'ping' system command is used.
 		- Comparing the ARP table in the android system to identify the status of devices, by 'ip neighbour' command
 		- Find out manufacturer in OUI database via Mac address
-		- Import IEEE official Oui database
+		- Imported from IEEE official Oui database
 		- Using Room frame on Database</br>
 	-  Architecture</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png) 
 - Speed test:
-	- Test the upload and download speed through JSpeedTest Lib, compatible with https://www.speedtest.net/
+	- Test the upload and download speed through JSpeedTest Lib, compatible with https://www.speedtest.net/ which has test servers all over the world.
 	- Key Point
 		- Using MVVM model	
 		- Using JSpeedTest third-party lib which is compatible with speedtest
@@ -36,7 +36,7 @@
 	- Test the connection with the DNS Server
 	- Test DNS domain name resolution(default:www.google.com)	
 	- Key Point
-		-  Detect Wifi and Data status via system services
+		- Detect Wifi and Data status via system services
 		- Check gateway and DNS connection by Ping command.
 		- By test resolving dns name of 'www.google.com', to judged if the DNS  is normal
 - Setting
