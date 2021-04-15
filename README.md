@@ -15,16 +15,16 @@
 	- Identify the device's manufacturer base on Mac address.
 	- Key Point
 		- Using MVVM and Room frame
-		- Use multithread pool to scan devices in same network, the 'ping' system command is used
 		- Animation are showing while scanning
-		- Fetch arp table and find device status by 'ip neighbour' command
-		- Upload IEEE official Oui device file in Sqlite database
-		- Find manufacturer by search Oui database via Mac address
+		- Use multithread pool to scan devices in network, the 'ping' system command is used
+		- By comparing the arp table in the android system to identify the status of device, by 'ip neighbour' command
+		- Find manufacturer in Oui database via Mac address
+		- Import IEEE official Oui database
 		- Using Room frame on Database</br>
 	-  Architecture</br>
 	![img](https://github.com/Lyon-CHEN/NetworkAnalysis/blob/main/Images/scan-fragment.png) 
 - Speed test:
-	- Test the upload and download speed under the current network connection through JSpeedTest Lib.
+	- Test the upload and download speed through JSpeedTest Lib, compatible with https://www.speedtest.net/
 	- Key Point
 		- Using MVVM model	
 		- Using JSpeedTest third-party lib which is compatible with speedtest
